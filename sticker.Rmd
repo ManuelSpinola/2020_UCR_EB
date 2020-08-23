@@ -1,0 +1,31 @@
+---
+title: "Untitled"
+output: html_document
+---
+
+```{r}
+library(hexSticker)
+library(magick)
+```
+
+```{r}
+rlogo <- image_read("R_logo.png")
+```
+
+
+```{r}
+s <- sticker(rlogo,
+             package = "EB_2020",
+             p_color = "dodgerblue3",
+             p_size = 9,
+             s_x = 1,
+             s_y = 0.75,
+             s_width = 1,
+             s_height = 1,
+             h_fill = "white",
+             h_color = "dodgerblue3",
+             filename = "hex_EB_2020.png")
+```
+
+
+
