@@ -3,7 +3,7 @@ title: "Estadística Básica"
 description: |
   Sitio web para el curso de Estadística Básica
 output_dir: "docs"
-exclude: ["mi_estilo.css", "*.png"]
+exclude: ["mi_estilo.css", "R_logo.png"]
 navbar:
   right:
   - text: "Inicio"
