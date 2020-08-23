@@ -1,14 +1,14 @@
 ---
-title: "Untitled"
+title: "Programa Estadística Básica"
 description: |
-  A new article created using the Distill format.
+  Programa del curso
 author:
   - name: Manuel Spínola
 date: "`r Sys.Date()`"
 output: distill::distill_article
 ---
 
-[Programa](01_programa/2020-Estadística_Básica.pdf)
+[Programa Estadística Básica](01_programa/2020-Estadística_Básica.pdf)
 
 
 
