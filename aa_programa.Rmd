@@ -1,0 +1,16 @@
+---
+title: "Untitled"
+description: |
+  A new article created using the Distill format.
+author:
+  - name: Manuel Spínola
+date: "`r Sys.Date()`"
+output: distill::distill_article
+---
+
+[Programa](01_programa/2020-Estadística_Básica.pdf)
+
+
+
+
+
