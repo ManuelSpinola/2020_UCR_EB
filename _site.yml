@@ -5,10 +5,17 @@ description: |
 output_dir: "docs"
 navbar:
   right:
-    - text: "Home"
-      href: index.html
-    - text: "About"
-      href: about.html
+  - text: "Inicio"
+    icon: fa-home
+    href: index.html
+  - text: "Programa"
+    icon: fa-file-alt
+    href: aa_programa.html
+  - text: "Clases"
+    icon: fa-user-graduate
+    menu:
+    - text: "Clase 01"
+      href: t_clase_01.html
 output:
   distill::distill_article:
     css: mi_estilo.css
