@@ -1,7 +1,7 @@
-name: "Prueba"
-title: "My Website"
+name: "2020-UCR_01"
+title: "Estadística Básica"
 description: |
-  My Website
+  Sitio web para el curso de Estadística Básica
 output_dir: "docs"
 navbar:
   right:

@@ -1,7 +1,7 @@
 ---
-title: "My Website"
+title: "Estadística Básica"
 description: |
-  Welcome to the website. I hope you enjoy it!
+  Sitio web para el curso de Estadística Básica
 site: distill::distill_website
 ---
 
