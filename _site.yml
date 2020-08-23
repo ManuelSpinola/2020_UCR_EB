@@ -9,6 +9,8 @@ navbar:
     href: index.html
   - text: "Programa"
     href: aa_programa.html
+  - text: "Bibliografía"
+    href: ab_bibliografia.html
   - text: "Clases"
     menu:
     - text: "Clase 01"
