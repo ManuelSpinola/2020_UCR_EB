@@ -9,13 +9,15 @@ navbar:
   - text: "Inicio"
     href: index.html
   - text: "Programa"
-    href: aa_programa.html
+    href: aaa_programa.html
   - text: "Bibliografía"
-    href: ab_bibliografia.html
+    href: aab_bibliografia.html
   - text: "Clases"
+    href: aac_clases.html
+  - text: "R scripts"
     menu:
-    - text: "Clase 01"
-      href: z_clase_01.html
+    - text: "Script_01"
+      href: z_script_01.html
 output:
   distill::distill_article:
     css: mi_estilo.css

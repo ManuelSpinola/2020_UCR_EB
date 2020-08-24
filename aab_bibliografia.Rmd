@@ -1,0 +1,25 @@
+---
+title: "Bibliografía"
+description: |
+  Bibliografía no obligatoria para el curso
+output: distill::distill_article
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+<br>
+
+[La insignificancia de las pruebas de significancia](https://digitalcommons.unl.edu/cgi/viewcontent.cgi?article=1225&context=usgsnpwrc)
+
+<br>
+
+[Alternativas a los valores de P](https://royalsocietypublishing.org/doi/10.1098/rsbl.2019.0174)
+
+<br>
+
+
+
+
