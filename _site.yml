@@ -6,18 +6,18 @@ output_dir: "docs"
 exclude: ["mi_estilo.css", "R_logo.png", "00_a_declaracion_horario", "00_b_teletrabajo"]
 navbar:
   right:
-  - text: "Inicio"
-    href: index.html
-  - text: "Programa"
-    href: aaa_programa.html
-  - text: "Bibliografía"
-    href: aab_bibliografia.html
-  - text: "Clases"
-    href: aac_clases.html
-  - text: "R scripts"
-    menu:
-      - text: "Script_01"
-        href: z_script_01.html
+    - text: "Inicio"
+      href: index.html
+    - text: "Programa"
+      href: aaa_programa.html
+    - text: "Bibliografía"
+      href: aab_bibliografia.html
+    - text: "Clases"
+      href: aac_clases.html
+    - text: "R scripts"
+      menu:
+        - text: "Script_01"
+          href: z_script_01.html
 output:
   distill::distill_article:
     css: mi_estilo.css
