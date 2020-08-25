@@ -41,14 +41,6 @@ include_graphics("04_ilustraciones/penguins.png")
 ping <- import("03_datos/pinguinos.xlsx")
 ```
 
-```{r}
-exp_01 <- import()
-```
-
-```{r}
-exp_02 <- import()
-```
-
 
 ```{r}
 head(ping)
@@ -64,22 +56,16 @@ media_peso
 
 
 ```{r}
-tabla_de_maria <- flextable(head(ping))
+tabla <- flextable(head(ping))
 ```
 
 ```{r}
-tabla_de_maria
+tabla
 ```
 
 ```{r}
-theme_zebra(tabla_de_maria)
+theme_zebra(tabla)
 ```
-
-
-```{r}
-
-```
-
 
 
 ```{r}
