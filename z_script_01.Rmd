@@ -21,7 +21,7 @@ Para cargar los paquetes utilizó la función library.
 
 #### Métodos
 
-```{r, message = FALSE, warning = FALSE}
+```{r, message = FALSE, warning = FALSE, echo=TRUE}
 library(tidyverse)
 library(rio)
 library(knitr)
