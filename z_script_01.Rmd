@@ -8,6 +8,18 @@ date: "`r Sys.Date()`"
 output: distill::distill_article
 ---
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+```{r, message = FALSE, warning = FALSE, echo=TRUE}
+library(tidyverse)
+library(rio)
+library(knitr)
+library(flextable)
+```
+
 
 # Comienzo
 
@@ -20,13 +32,6 @@ Para cargar los paquetes utilizó la función library.
 **negrita**
 
 #### Métodos
-
-```{r, message = FALSE, warning = FALSE, echo=TRUE}
-library(tidyverse)
-library(rio)
-library(knitr)
-library(flextable)
-```
 
 
 ```{r}
