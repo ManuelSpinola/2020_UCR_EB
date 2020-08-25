@@ -1,0 +1,109 @@
+---
+title: "Script 01"
+description: |
+  Código de R
+author:
+  - name: Manuel Spínola 
+date: "`r Sys.Date()`"
+output: distill::distill_article
+---
+
+
+# Comienzo
+
+## Primer chunk
+
+### cargar paquetes
+
+Para cargar los paquetes utilizó la función library.
+
+**negrita**
+
+#### Métodos
+
+```{r, message = FALSE, warning = FALSE}
+library(tidyverse)
+library(rio)
+library(knitr)
+library(flextable)
+```
+
+
+```{r}
+include_graphics("04_ilustraciones/r_first_then.png")
+```
+
+```{r}
+include_graphics("04_ilustraciones/penguins.png")
+```
+
+```{r}
+ping <- import("03_datos/pinguinos.xlsx")
+```
+
+```{r}
+exp_01 <- import()
+```
+
+```{r}
+exp_02 <- import()
+```
+
+
+```{r}
+head(ping)
+```
+
+```{r}
+media_peso <- mean(ping$body_mass_g, na.rm = TRUE)
+```
+
+```{r}
+media_peso
+```
+
+
+```{r}
+tabla_de_maria <- flextable(head(ping))
+```
+
+```{r}
+tabla_de_maria
+```
+
+```{r}
+theme_zebra(tabla_de_maria)
+```
+
+
+```{r}
+
+```
+
+
+
+```{r}
+include_graphics("04_ilustraciones/coding_cases.png")
+```
+
+altura_planta
+
+alturaPlanta
+
+AlturaPlanta
+
+altura-planta
+
+```{r}
+include_graphics("04_ilustraciones/continuous_discrete.png")
+```
+
+```{r}
+include_graphics("04_ilustraciones/nominal_ordinal_binary.png")
+```
+
+
+
+
+
+
