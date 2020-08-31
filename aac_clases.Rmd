@@ -15,6 +15,9 @@ knitr::opts_chunk$set(echo = FALSE)
 [Clase 01](02_clases/Introduccion_a_la_estadistica_y_estadistica_descriptiva.pdf)
 
 
+[Clase 02](02_clases/Introduccion_a_la_estadistica_y_estadistica_descriptiva.pdf)
+
+
 
 
 
