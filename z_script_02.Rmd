@@ -1,0 +1,120 @@
+---
+title: "Script 02"
+description: |
+  Código de R
+author:
+  - name: Manuel Spínola
+date: "`r Sys.Date()`"
+output: distill::distill_article
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(rio)
+library(fabricerin)
+library(visdat)
+library(vtree)
+```
+
+
+```{r}
+fabric_drawing(cid = "dibujo_01",
+               cfill = "orange")
+```
+
+```{r}
+fabric_text(cid = "función",
+            textId = "texto_01",
+            text = "objeto <- función(argumento1, argumento2)",
+            fontSize = 20)
+```
+
+```{r}
+ping <- import("03_datos/pinguinos.xlsx")
+```
+
+```{r}
+head(ping)
+```
+
+
+```{r}
+vis_dat(ping)
+```
+
+```{r}
+ping <- na.omit(ping)
+```
+
+```{r}
+vis_dat(ping)
+```
+
+```{r}
+ping$species <- factor(ping$species)
+ping$island <- factor(ping$island)
+ping$sex <- factor(ping$sex)
+```
+
+```{r}
+vis_dat(ping)
+```
+
+```{r}
+vtree(ping, "species island sex", horiz = FALSE, varnamepointsize = 24)
+```
+
+```{r}
+medias <- ping %>%
+  group_by(species, sex) %>%
+  summarize(promedio = mean(body_mass_g))
+```
+
+```{r}
+medias
+```
+
+
+
+```{r}
+ggplot(ping, aes(x = species, y = body_mass_g)) +
+  geom_boxplot(alpha = 0.2) +
+  geom_jitter(width = 0.2, aes(color = flipper_length_mm, shape = island, size = bill_length_mm)) +
+  facet_wrap(vars(sex)) +
+  geom_point(data = medias, aes(x = species, y = promedio), color = "red") +
+  geom_text(data = medias, aes(x = species, y = promedio, label = round(promedio, 0)), hjust = -0.01) +
+  theme_bw()
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
