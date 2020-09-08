@@ -1,0 +1,73 @@
+---
+title: "Untitled"
+description: |
+  A new article created using the Distill format.
+author:
+  - name: Nora Jones 
+    url: https://example.com/norajones
+    affiliation: Spacely Sprockets
+    affiliation_url: https://example.com/spacelysprokets
+date: "`r Sys.Date()`"
+output: distill::distill_article
+---
+
+```{r, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(rio)
+library(fabricerin)
+library(visdat)
+library(vtree)
+```
+
+
+```{r}
+ping <- import("03_datos/pinguinos.xlsx")
+```
+
+```{r}
+head(ping)
+```
+
+```{r}
+ping <- na.omit(ping)
+```
+
+```{r}
+est <- ping %>%
+  group_by(species) %>%
+  summarise(media = mean(body_mass_g),
+            n = n(),
+            de = sd(body_mass_g),
+            ee = de/sqrt(n()),
+            li = media - 1.96*ee,
+            ls = media + 1.96*ee)
+```
+
+```{r}
+est
+```
+
+```{r}
+ggplot(ping, aes(x = species, y = body_mass_g)) +
+  geom_jitter(width = 0.2, alpha = 0.3) +
+  geom_point(data = est, aes(x = species, y = media), color = "red", size = 2) +
+  geom_errorbar(data = est, aes(x = species, y = media, ymin = media - de, ymax = media + de), width = 0.3, color = "green") +
+  geom_errorbar(data = est, aes(x = species, y = media, ymin = media - ee, ymax = media + ee), width = 0.3, color = "red") +
+  geom_errorbar(data = est, aes(x = species, y = media, ymin = li, ymax = ls), width = 0.3, color = "blue")
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
