@@ -17,7 +17,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 [Clase 02](02_clases/Estadistica_inferencial-Estimacion_de_parametros.pdf)
 
-
+[Clase 03](02_clases/Estadistica_inferencial-Prueba_de_hipotesis.pdf)
 
 
 

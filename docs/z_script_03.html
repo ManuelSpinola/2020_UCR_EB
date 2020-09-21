@@ -19,29 +19,33 @@
  <!--/radix_placeholder_import_source-->
 
   <!--radix_placeholder_meta_tags-->
-  <title>Estadística Básica</title>
+  <title>Estadística Básica: Untitled</title>
 
-  <meta property="description" itemprop="description" content="Sitio web para el curso de Estadística Básica"/>
+  <meta property="description" itemprop="description" content="A new article created using the Distill format."/>
 
 
+  <!--  https://schema.org/Article -->
+  <meta property="article:published" itemprop="datePublished" content="2020-09-21"/>
+  <meta property="article:created" itemprop="dateCreated" content="2020-09-21"/>
+  <meta name="article:author" content="Nora Jones"/>
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-  <meta property="og:title" content="Estadística Básica"/>
+  <meta property="og:title" content="Estadística Básica: Untitled"/>
   <meta property="og:type" content="article"/>
-  <meta property="og:description" content="Sitio web para el curso de Estadística Básica"/>
+  <meta property="og:description" content="A new article created using the Distill format."/>
   <meta property="og:locale" content="en_US"/>
   <meta property="og:site_name" content="Estadística Básica"/>
 
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
-  <meta property="twitter:title" content="Estadística Básica"/>
-  <meta property="twitter:description" content="Sitio web para el curso de Estadística Básica"/>
+  <meta property="twitter:title" content="Estadística Básica: Untitled"/>
+  <meta property="twitter:description" content="A new article created using the Distill format."/>
 
   <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","site"]}},"value":[{"type":"character","attributes":{},"value":["Estadística Básica"]},{"type":"character","attributes":{},"value":["Sitio web para el curso de Estadística Básica\n"]},{"type":"character","attributes":{},"value":["distill::distill_website"]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Untitled"]},{"type":"character","attributes":{},"value":["A new article created using the Distill format.\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url","affiliation","affiliation_url"]}},"value":[{"type":"character","attributes":{},"value":["Nora Jones"]},{"type":"character","attributes":{},"value":["https://example.com/norajones"]},{"type":"character","attributes":{},"value":["Spacely Sprockets"]},{"type":"character","attributes":{},"value":["https://example.com/spacelysprokets"]}]}]},{"type":"character","attributes":{},"value":["2020-09-21"]},{"type":"character","attributes":{},"value":["distill::distill_article"]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   <!--radix_placeholder_navigation_in_header-->
@@ -1314,7 +1318,7 @@
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Estadística Básica","description":"Sitio web para el curso de Estadística Básica","authors":[]}
+{"title":"Untitled","description":"A new article created using the Distill format.","authors":[{"author":"Nora Jones","authorURL":"https://example.com/norajones","affiliation":"Spacely Sprockets","affiliationURL":"https://example.com/spacelysprokets"}],"publishedDate":"2020-09-21T00:00:00.000-06:00","citationText":"Jones, 2020"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -1350,14 +1354,57 @@ R scripts
 <!--/radix_placeholder_site_before_body-->
 
 <div class="d-title">
-<h1>Estadística Básica</h1>
-<p><p>Sitio web para el curso de Estadística Básica</p></p>
+<h1>Untitled</h1>
+<p><p>A new article created using the Distill format.</p></p>
 </div>
 
+<div class="d-byline">
+  Nora Jones <a href="https://example.com/norajones" class="uri">https://example.com/norajones</a> (Spacely Sprockets)<a href="https://example.com/spacelysprokets" class="uri">https://example.com/spacelysprokets</a>
+  
+<br/>2020-09-21
+</div>
 
 <div class="d-article">
 <div class="layout-chunk" data-layout="l-body">
-<p><img src="hex_EB_2020.png" width="259" /></p>
+
+</div>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<pre><code>
+  species    island bill_length_mm bill_depth_mm flipper_length_mm
+1  Adelie Torgersen           39.1          18.7               181
+2  Adelie Torgersen           39.5          17.4               186
+3  Adelie Torgersen           40.3          18.0               195
+4  Adelie Torgersen             NA            NA                NA
+5  Adelie Torgersen           36.7          19.3               193
+6  Adelie Torgersen           39.3          20.6               190
+  body_mass_g    sex
+1        3750   male
+2        3800 female
+3        3250 female
+4          NA   &lt;NA&gt;
+5        3450 female
+6        3650   male</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<pre><code>
+# A tibble: 3 x 7
+  species   media     n    de    ee    li    ls
+  &lt;chr&gt;     &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+1 Adelie    3706.   146  459.  38.0 3632. 3781.
+2 Chinstrap 3733.    68  384.  46.6 3642. 3824.
+3 Gentoo    5092.   119  501.  46.0 5002. 5183.</code></pre>
+</div>
+<div class="layout-chunk" data-layout="l-body">
+<p><img src="z_script_03_files/figure-html5/unnamed-chunk-7-1.png" width="624" /></p>
 </div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
