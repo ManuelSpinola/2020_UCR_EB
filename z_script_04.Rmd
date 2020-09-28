@@ -19,12 +19,49 @@ library(parameters)
 ping <- import("03_datos/pinguinos.xlsx")
 ```
 
+
 ```{r}
-mod <- lm(body_mass_g ~ sex, data = ping)
+ping$species <- factor(ping$species)
+ping$sex <- factor(ping$sex)
 ```
 
 ```{r}
-medias <- estimate_means(mod, "sex")
+head(ping)
+```
+
+```{r}
+ping <- na.omit(ping)
+```
+
+
+```{r}
+adelie <- ping %>% filter(species == "Adelie")
+```
+
+```{r}
+head(adelie)
+```
+
+
+```{r}
+ggplot(adelie, aes(sex, body_mass_g)) +
+  geom_boxplot() +
+  geom_violin(alpha = 0.4) +
+  geom_jitter(width = 0.2) +
+  stat_summary(fun.data = "mean_cl_normal", colour = "red", size = 1)
+```
+
+```{r}
+t.test(body_mass_g ~ sex, data = adelie, var.equal = TRUE)
+```
+
+alfa = 0.05
+P < 0.05
+
+```{r}
+medias <- adelie %>%
+  group_by(sex) %>%
+  summarize(media = mean(body_mass_g))
 ```
 
 ```{r}
@@ -33,21 +70,67 @@ medias
 
 
 ```{r}
-cont <- estimate_contrasts(comp, "sex")
+MeanDiffCI(body_mass_g ~ sex, data = adelie)
+```
+male - female = 675 (IC 95% = 573 , 776)
+
+```{r}
+mean(adelie$body_mass_g)
+```
+
+
+```{r}
+675/3706
 ```
 
 ```{r}
-cont
+mod <- lm(body_mass_g ~ sex, data = adelie)
 ```
 
 ```{r}
-plot(estimate_contrasts(mod), estimate_means(mod))
+summary(mod)
+```
+
+```{r}
+confint(mod)
+```
+
+```{r}
+medias <- estimate_means(mod, "sex")
+medias
+```
+```{r}
+4043.49 - 3368.84 
 ```
 
 
+```{r}
+contraste <- estimate_contrasts(mod, "sex")
+contraste
+```
 
+```{r}
+e <- emmeans(mod, "sex")
+```
 
+```{r}
+e
+```
 
+```{r}
+p <- pairs(e)
+```
+
+```{r}
+p
+```
+```{r}
+confint(p)
+```
+
+```{r}
+plot(p) + geom_vline(xintercept = 0)
+```
 
 
 
