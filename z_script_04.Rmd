@@ -3,11 +3,52 @@ title: "Untitled"
 output: html_document
 ---
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 library(tidyverse)
 library(rio)
+library(collapse)
 library(DescTools)
+library(emmeans)
+library(modelbased)
+library(see)
+library(parameters)
 ```
+
+
+```{r}
+ping <- import("03_datos/pinguinos.xlsx")
+```
+
+```{r}
+mod <- lm(body_mass_g ~ sex, data = ping)
+```
+
+```{r}
+medias <- estimate_means(mod, "sex")
+```
+
+```{r}
+medias
+```
+
+
+```{r}
+cont <- estimate_contrasts(comp, "sex")
+```
+
+```{r}
+cont
+```
+
+```{r}
+plot(estimate_contrasts(mod), estimate_means(mod))
+```
+
+
+
+
+
+
 
 
 
