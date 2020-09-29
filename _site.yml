@@ -14,6 +14,8 @@ navbar:
       href: aab_bibliografia.html
     - text: "Clases"
       href: aac_clases.html
+    - text: "Tareas"
+      href: aad_tareas.html
     - text: "R scripts"
       menu:
         - text: "Script_01"
