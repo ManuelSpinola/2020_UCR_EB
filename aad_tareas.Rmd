@@ -6,6 +6,6 @@ output: html_document
 
 
 
-[Tarea 01]("05_tareas/Tarea_01.Rmd")
+[Tarea 01](05_tareas/Tarea_01.Rmd)
 
 
