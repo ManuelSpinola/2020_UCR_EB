@@ -1,11 +1,21 @@
 ---
 title: "Tareas"
-output: html_document
+description: |
+  Tareas del curso
+author:
+  - name: Manuel Spínola
+date: "`r Sys.Date()`"
+output: distill::distill_article
 ---
 
-
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
 
 
 [Tarea 01](05_tareas/Tarea_01.Rmd)
+
+
+
 
 
