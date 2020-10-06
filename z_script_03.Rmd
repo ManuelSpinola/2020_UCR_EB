@@ -16,7 +16,6 @@ library(visdat)
 library(vtree)
 ```
 
-
 ```{r}
 ping <- import("03_datos/pinguinos.xlsx")
 ```
@@ -52,19 +51,3 @@ ggplot(ping, aes(x = species, y = body_mass_g)) +
   geom_errorbar(data = est, aes(x = species, y = media, ymin = media - ee, ymax = media + ee), width = 0.3, color = "red") +
   geom_errorbar(data = est, aes(x = species, y = media, ymin = li, ymax = ls), width = 0.3, color = "blue")
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

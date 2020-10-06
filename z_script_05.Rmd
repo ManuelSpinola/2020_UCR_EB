@@ -1,0 +1,88 @@
+---
+title: "Untitled"
+output: html_document
+---
+
+
+```{r}
+library(tidyverse)
+library(survey)
+library(SDaA)
+```
+
+```{r}
+data("otters")
+```
+
+```{r}
+head(otters)
+```
+
+```{r}
+otters$habitat <- factor(otters$habitat, labels = c("A", "B", "C", "D"))
+```
+
+```{r}
+head(otters)
+```
+
+```{r}
+dim(otters)
+```
+
+```{r}
+otters$N <- 237
+```
+
+```{r}
+head(otters)
+```
+
+```{r}
+mi_diseño <- svydesign(id = ~ 1, data = otters, fpc = ~ N)
+```
+
+```{r}
+mi_diseño
+```
+
+```{r}
+svymean(~ holts, design = mi_diseño)
+```
+
+```{r}
+confint(svymean(~holts, design = mi_diseño))
+```
+
+```{r}
+tot <- svytotal(~holts, design = mi_diseño)
+```
+
+```{r}
+tot
+```
+
+
+
+```{r}
+ci_tot <- confint(tot)
+```
+
+```{r}
+ci_tot
+```
+```{r}
+ci_df <- as.data.frame(ci_tot)
+```
+
+```{r}
+ci_df
+```
+
+```{r}
+e <- export(ci_df)
+```
+
+
+
+
