@@ -5,7 +5,9 @@ description: |
 author:
   - name: Manuel Spínola
 date: "`r Sys.Date()`"
-output: distill::distill_article
+output:
+  distill::distill_article:
+    code_download: true
 ---
 
 ```{r setup, include=FALSE}
@@ -14,6 +16,9 @@ knitr::opts_chunk$set(echo = FALSE)
 
 
 [Tarea 01](05_tareas/Tarea_01.Rmd) Para entregar el martes 6 de octubre 2020
+
+[Tarea 02](05_tareas/Tarea_02.Rmd) Para entregar el martes 13 de octubre 2020
+
 
 
 
