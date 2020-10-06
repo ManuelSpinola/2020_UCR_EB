@@ -79,9 +79,7 @@ ci_df <- as.data.frame(ci_tot)
 ci_df
 ```
 
-```{r}
-e <- export(ci_df)
-```
+
 
 
 
