@@ -5,7 +5,9 @@ description: |
 author:
   - name: Manuel Spínola 
 date: "`r Sys.Date()`"
-output: distill::distill_article
+output:
+  distill::distill_article:
+    code_download: true
 ---
 
 ```{r setup, include=FALSE}

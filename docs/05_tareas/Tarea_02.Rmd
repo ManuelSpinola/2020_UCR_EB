@@ -1,9 +1,7 @@
 ---
 title: "Tarea_02"
 author: "Manuel Spínola"
-output:
-  html_document:
-    code_download: true
+output: html_document
 ---
 
 ```{r}
