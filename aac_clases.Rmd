@@ -19,7 +19,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 [Clase 03](02_clases/clase_03.pdf)
 
-[Clase 04](file:///Users/manuelspinola/Documents/01-Manolo/R_Cursos_Material/Presentaciones/Muestreo/diseno_de_muestreo.html#5)
+[Clase 04](02_clases/clase_04.pdf)
 
 
 
