@@ -12,14 +12,14 @@ output: distill::distill_article
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-[Clase 01](02_clases/Introduccion_a_la_estadistica_y_estadistica_descriptiva.pdf)
+[Clase 01](02_clases/clase_01.pdf)
 
 
-[Clase 02](02_clases/Estadistica_inferencial-Estimacion_de_parametros.pdf)
+[Clase 02](02_clases/clase_02.pdf)
 
-[Clase 03](02_clases/Estadistica_inferencial-Prueba_de_hipotesis.pdf)
+[Clase 03](02_clases/clase_03.pdf)
 
-[Clase 04](~/Documents/01-Manolo/R_Cursos_Material/Presentaciones/Muestreo)
+[Clase 04](file:///Users/manuelspinola/Documents/01-Manolo/R_Cursos_Material/Presentaciones/Muestreo/diseno_de_muestreo.html#5)
 
 
 
