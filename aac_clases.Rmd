@@ -19,7 +19,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 [Clase 03](02_clases/Estadistica_inferencial-Prueba_de_hipotesis.pdf)
 
-[Clase 04](02_clases/diseno_de_muestreo.html)
+[Clase 04](~/Documents/01-Manolo/R_Cursos_Material/Presentaciones/Muestreo)
 
 
 
