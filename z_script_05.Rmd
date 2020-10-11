@@ -1,6 +1,12 @@
 ---
-title: "Untitled"
-output: html_document
+title: "Script 05"
+author: "Autor: Manuel Spínola"
+output:
+  html_document:
+    toc: true
+    toc_depth: 6
+    toc_float:
+      collapsed: false
 ---
 
 

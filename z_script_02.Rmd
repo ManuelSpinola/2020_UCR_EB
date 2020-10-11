@@ -1,11 +1,12 @@
 ---
 title: "Script 02"
-description: |
-  Código de R
-author:
-  - name: Manuel Spínola
-date: "`r Sys.Date()`"
-output: distill::distill_article
+author: "Autor: Manuel Spínola"
+output:
+  html_document:
+    toc: true
+    toc_depth: 6
+    toc_float:
+      collapsed: false
 ---
 
 ```{r setup, include=FALSE}
