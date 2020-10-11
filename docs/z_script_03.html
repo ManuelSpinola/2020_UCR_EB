@@ -25,6 +25,8 @@
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 
@@ -79,6 +81,9 @@ h6 {
 }
 .table th:not([align]) {
   text-align: left;
+}
+#rmd-source-code {
+  display: none;
 }
 </style>
 
@@ -259,6 +264,9 @@ $(document).ready(function () {
 </style>
 
 <!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
 
 
 
@@ -413,6 +421,13 @@ div.tocify {
 
 <div class="fluid-row" id="header">
 
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
 
 
 <h1 class="title toc-ignore">Script 03</h1>
@@ -467,6 +482,7 @@ library(vtree)</code></pre>
   geom_errorbar(data = est, aes(x = species, y = media, ymin = li, ymax = ls), width = 0.3, color = &quot;blue&quot;)</code></pre>
 <p><img src="z_script_03_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiU2NyaXB0IDAzIgphdXRob3I6ICJBdXRvcjogTWFudWVsIFNww61ub2xhIgpvdXRwdXQ6CiAgaHRtbF9kb2N1bWVudDoKICAgIHRvYzogdHJ1ZQogICAgdG9jX2RlcHRoOiA2CiAgICB0b2NfZmxvYXQ6CiAgICAgIGNvbGxhcHNlZDogZmFsc2UKICAgIGNvZGVfZG93bmxvYWQ6IHRydWUKLS0tCgpgYGB7ciwgbWVzc2FnZT1GQUxTRSwgd2FybmluZz1GQUxTRX0KbGlicmFyeSh0aWR5dmVyc2UpCmxpYnJhcnkocmlvKQpsaWJyYXJ5KGZhYnJpY2VyaW4pCmxpYnJhcnkodmlzZGF0KQpsaWJyYXJ5KHZ0cmVlKQpgYGAKCmBgYHtyfQpwaW5nIDwtIGltcG9ydCgiMDNfZGF0b3MvcGluZ3Vpbm9zLnhsc3giKQpgYGAKCmBgYHtyfQpoZWFkKHBpbmcpCmBgYAoKYGBge3J9CnBpbmcgPC0gbmEub21pdChwaW5nKQpgYGAKCmBgYHtyfQplc3QgPC0gcGluZyAlPiUKICBncm91cF9ieShzcGVjaWVzKSAlPiUKICBzdW1tYXJpc2UobWVkaWEgPSBtZWFuKGJvZHlfbWFzc19nKSwKICAgICAgICAgICAgbiA9IG4oKSwKICAgICAgICAgICAgZGUgPSBzZChib2R5X21hc3NfZyksCiAgICAgICAgICAgIGVlID0gZGUvc3FydChuKCkpLAogICAgICAgICAgICBsaSA9IG1lZGlhIC0gMS45NiplZSwKICAgICAgICAgICAgbHMgPSBtZWRpYSArIDEuOTYqZWUpCmBgYAoKYGBge3J9CmVzdApgYGAKCmBgYHtyfQpnZ3Bsb3QocGluZywgYWVzKHggPSBzcGVjaWVzLCB5ID0gYm9keV9tYXNzX2cpKSArCiAgZ2VvbV9qaXR0ZXIod2lkdGggPSAwLjIsIGFscGhhID0gMC4zKSArCiAgZ2VvbV9wb2ludChkYXRhID0gZXN0LCBhZXMoeCA9IHNwZWNpZXMsIHkgPSBtZWRpYSksIGNvbG9yID0gInJlZCIsIHNpemUgPSAyKSArCiAgZ2VvbV9lcnJvcmJhcihkYXRhID0gZXN0LCBhZXMoeCA9IHNwZWNpZXMsIHkgPSBtZWRpYSwgeW1pbiA9IG1lZGlhIC0gZGUsIHltYXggPSBtZWRpYSArIGRlKSwgd2lkdGggPSAwLjMsIGNvbG9yID0gImdyZWVuIikgKwogIGdlb21fZXJyb3JiYXIoZGF0YSA9IGVzdCwgYWVzKHggPSBzcGVjaWVzLCB5ID0gbWVkaWEsIHltaW4gPSBtZWRpYSAtIGVlLCB5bWF4ID0gbWVkaWEgKyBlZSksIHdpZHRoID0gMC4zLCBjb2xvciA9ICJyZWQiKSArCiAgZ2VvbV9lcnJvcmJhcihkYXRhID0gZXN0LCBhZXMoeCA9IHNwZWNpZXMsIHkgPSBtZWRpYSwgeW1pbiA9IGxpLCB5bWF4ID0gbHMpLCB3aWR0aCA9IDAuMywgY29sb3IgPSAiYmx1ZSIpCmBgYAo=</div>
 
 
 </div>
@@ -502,6 +518,11 @@ $(document).ready(function () {
 </script>
 
 <!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("z_script_03.Rmd");
+});
+</script>
 
 <script>
 $(document).ready(function ()  {

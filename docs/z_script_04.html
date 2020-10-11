@@ -25,6 +25,8 @@
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 
@@ -79,6 +81,9 @@ h6 {
 }
 .table th:not([align]) {
   text-align: left;
+}
+#rmd-source-code {
+  display: none;
 }
 </style>
 
@@ -259,6 +264,9 @@ $(document).ready(function () {
 </style>
 
 <!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
 
 
 
@@ -413,6 +421,13 @@ div.tocify {
 
 <div class="fluid-row" id="header">
 
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
 
 
 <h1 class="title toc-ignore">Untitled</h1>
@@ -557,6 +572,7 @@ contraste</code></pre>
 <pre class="r"><code>plot(p) + geom_vline(xintercept = 0)</code></pre>
 <p><img src="z_script_04_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
 
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiVW50aXRsZWQiCmF1dGhvcjogIkF1dG9yOiBNYW51ZWwgU3DDrW5vbGEiCm91dHB1dDoKICBodG1sX2RvY3VtZW50OgogICAgdG9jOiB0cnVlCiAgICB0b2NfZGVwdGg6IDYKICAgIHRvY19mbG9hdDoKICAgICAgY29sbGFwc2VkOiBmYWxzZQogICAgY29kZV9kb3dubG9hZDogdHJ1ZQotLS0KCmBgYHtyLCBtZXNzYWdlPUZBTFNFLCB3YXJuaW5nPUZBTFNFfQpsaWJyYXJ5KHRpZHl2ZXJzZSkKbGlicmFyeShyaW8pCmxpYnJhcnkoY29sbGFwc2UpCmxpYnJhcnkoRGVzY1Rvb2xzKQpsaWJyYXJ5KGVtbWVhbnMpCmxpYnJhcnkobW9kZWxiYXNlZCkKbGlicmFyeShzZWUpCmxpYnJhcnkocGFyYW1ldGVycykKYGBgCgoKYGBge3J9CnBpbmcgPC0gaW1wb3J0KCIwM19kYXRvcy9waW5ndWlub3MueGxzeCIpCmBgYAoKCmBgYHtyfQpwaW5nJHNwZWNpZXMgPC0gZmFjdG9yKHBpbmckc3BlY2llcykKcGluZyRzZXggPC0gZmFjdG9yKHBpbmckc2V4KQpgYGAKCmBgYHtyfQpoZWFkKHBpbmcpCmBgYAoKYGBge3J9CnBpbmcgPC0gbmEub21pdChwaW5nKQpgYGAKCgpgYGB7cn0KYWRlbGllIDwtIHBpbmcgJT4lIGZpbHRlcihzcGVjaWVzID09ICJBZGVsaWUiKQpgYGAKCmBgYHtyfQpoZWFkKGFkZWxpZSkKYGBgCgoKYGBge3J9CmdncGxvdChhZGVsaWUsIGFlcyhzZXgsIGJvZHlfbWFzc19nKSkgKwogIGdlb21fYm94cGxvdCgpICsKICBnZW9tX3Zpb2xpbihhbHBoYSA9IDAuNCkgKwogIGdlb21faml0dGVyKHdpZHRoID0gMC4yKSArCiAgc3RhdF9zdW1tYXJ5KGZ1bi5kYXRhID0gIm1lYW5fY2xfbm9ybWFsIiwgY29sb3VyID0gInJlZCIsIHNpemUgPSAxKQpgYGAKCmBgYHtyfQp0LnRlc3QoYm9keV9tYXNzX2cgfiBzZXgsIGRhdGEgPSBhZGVsaWUsIHZhci5lcXVhbCA9IFRSVUUpCmBgYAoKYWxmYSA9IDAuMDUKUCA8IDAuMDUKCmBgYHtyfQptZWRpYXMgPC0gYWRlbGllICU+JQogIGdyb3VwX2J5KHNleCkgJT4lCiAgc3VtbWFyaXplKG1lZGlhID0gbWVhbihib2R5X21hc3NfZykpCmBgYAoKYGBge3J9Cm1lZGlhcwpgYGAKCgpgYGB7cn0KTWVhbkRpZmZDSShib2R5X21hc3NfZyB+IHNleCwgZGF0YSA9IGFkZWxpZSkKYGBgCm1hbGUgLSBmZW1hbGUgPSA2NzUgKElDIDk1JSA9IDU3MyAsIDc3NikKCmBgYHtyfQptZWFuKGFkZWxpZSRib2R5X21hc3NfZykKYGBgCgoKYGBge3J9CjY3NS8zNzA2CmBgYAoKYGBge3J9Cm1vZCA8LSBsbShib2R5X21hc3NfZyB+IHNleCwgZGF0YSA9IGFkZWxpZSkKYGBgCgpgYGB7cn0Kc3VtbWFyeShtb2QpCmBgYAoKYGBge3J9CmNvbmZpbnQobW9kKQpgYGAKCmBgYHtyfQptZWRpYXMgPC0gZXN0aW1hdGVfbWVhbnMobW9kLCAic2V4IikKbWVkaWFzCmBgYApgYGB7cn0KNDA0My40OSAtIDMzNjguODQgCmBgYAoKCmBgYHtyfQpjb250cmFzdGUgPC0gZXN0aW1hdGVfY29udHJhc3RzKG1vZCwgInNleCIpCmNvbnRyYXN0ZQpgYGAKCmBgYHtyfQplIDwtIGVtbWVhbnMobW9kLCAic2V4IikKYGBgCgpgYGB7cn0KZQpgYGAKCmBgYHtyfQpwIDwtIHBhaXJzKGUpCmBgYAoKYGBge3J9CnAKYGBgCmBgYHtyfQpjb25maW50KHApCmBgYAoKYGBge3J9CnBsb3QocCkgKyBnZW9tX3ZsaW5lKHhpbnRlcmNlcHQgPSAwKQpgYGAKCgoKCgoK</div>
 
 
 </div>
@@ -592,6 +608,11 @@ $(document).ready(function () {
 </script>
 
 <!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("z_script_04.Rmd");
+});
+</script>
 
 <script>
 $(document).ready(function ()  {

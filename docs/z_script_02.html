@@ -25,6 +25,8 @@
 <link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
 <script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 <script src="site_libs/fabric-3.6.3/fabric.min.js"></script>
@@ -82,6 +84,9 @@ h6 {
 }
 .table th:not([align]) {
   text-align: left;
+}
+#rmd-source-code {
+  display: none;
 }
 </style>
 
@@ -262,6 +267,9 @@ $(document).ready(function () {
 </style>
 
 <!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
 
 
 
@@ -415,6 +423,13 @@ div.tocify {
 </div><!--/.navbar -->
 
 <div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
 
 
 
@@ -580,7 +595,7 @@ ping$sex &lt;- factor(ping$sex)</code></pre>
 <pre class="r"><code>vis_dat(ping)</code></pre>
 <p><img src="z_script_02_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <pre class="r"><code>vtree(ping, &quot;species island sex&quot;, horiz = FALSE, varnamepointsize = 24)</code></pre>
-<p><img src="/private/var/folders/cl/hcgkwrb55ls2pmv5kkrslvm40000gn/T/Rtmp4HDos9/vtree2.png" style="height:3in" /></p>
+<p><img src="/private/var/folders/cl/hcgkwrb55ls2pmv5kkrslvm40000gn/T/RtmpM1POif/vtree2.png" style="height:3in" /></p>
 <pre class="r"><code>medias &lt;- ping %&gt;%
   group_by(species, sex) %&gt;%
   summarize(promedio = mean(body_mass_g))</code></pre>
@@ -605,6 +620,7 @@ ping$sex &lt;- factor(ping$sex)</code></pre>
   theme_bw()</code></pre>
 <p><img src="z_script_02_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiU2NyaXB0IDAyIgphdXRob3I6ICJBdXRvcjogTWFudWVsIFNww61ub2xhIgpvdXRwdXQ6CiAgaHRtbF9kb2N1bWVudDoKICAgIHRvYzogdHJ1ZQogICAgdG9jX2RlcHRoOiA2CiAgICB0b2NfZmxvYXQ6CiAgICAgIGNvbGxhcHNlZDogZmFsc2UKICAgIGNvZGVfZG93bmxvYWQ6IHRydWUKLS0tCgpgYGB7ciBzZXR1cCwgaW5jbHVkZT1GQUxTRX0Ka25pdHI6Om9wdHNfY2h1bmskc2V0KGVjaG8gPSBUUlVFKQpgYGAKCmBgYHtyLCBtZXNzYWdlPUZBTFNFLCB3YXJuaW5nPUZBTFNFfQpsaWJyYXJ5KHRpZHl2ZXJzZSkKbGlicmFyeShyaW8pCmxpYnJhcnkoZmFicmljZXJpbikKbGlicmFyeSh2aXNkYXQpCmxpYnJhcnkodnRyZWUpCmBgYAoKYGBge3J9CmZhYnJpY19kcmF3aW5nKGNpZCA9ICJkaWJ1am9fMDEiLAogICAgICAgICAgICAgICBjZmlsbCA9ICJvcmFuZ2UiKQpgYGAKCmBgYHtyfQpmYWJyaWNfdGV4dChjaWQgPSAiZnVuY2nDs24iLAogICAgICAgICAgICB0ZXh0SWQgPSAidGV4dG9fMDEiLAogICAgICAgICAgICB0ZXh0ID0gIm9iamV0byA8LSBmdW5jacOzbihhcmd1bWVudG8xLCBhcmd1bWVudG8yKSIsCiAgICAgICAgICAgIGZvbnRTaXplID0gMjApCmBgYAoKYGBge3J9CnBpbmcgPC0gaW1wb3J0KCIwM19kYXRvcy9waW5ndWlub3MueGxzeCIpCmBgYAoKYGBge3J9CmhlYWQocGluZykKYGBgCgpgYGB7cn0KdmlzX2RhdChwaW5nKQpgYGAKCmBgYHtyfQpwaW5nIDwtIG5hLm9taXQocGluZykKYGBgCgpgYGB7cn0KdmlzX2RhdChwaW5nKQpgYGAKCmBgYHtyfQpwaW5nJHNwZWNpZXMgPC0gZmFjdG9yKHBpbmckc3BlY2llcykKcGluZyRpc2xhbmQgPC0gZmFjdG9yKHBpbmckaXNsYW5kKQpwaW5nJHNleCA8LSBmYWN0b3IocGluZyRzZXgpCmBgYAoKYGBge3J9CnZpc19kYXQocGluZykKYGBgCgpgYGB7cn0KdnRyZWUocGluZywgInNwZWNpZXMgaXNsYW5kIHNleCIsIGhvcml6ID0gRkFMU0UsIHZhcm5hbWVwb2ludHNpemUgPSAyNCkKYGBgCgpgYGB7cn0KbWVkaWFzIDwtIHBpbmcgJT4lCiAgZ3JvdXBfYnkoc3BlY2llcywgc2V4KSAlPiUKICBzdW1tYXJpemUocHJvbWVkaW8gPSBtZWFuKGJvZHlfbWFzc19nKSkKYGBgCgpgYGB7cn0KbWVkaWFzCmBgYAoKYGBge3J9CmdncGxvdChwaW5nLCBhZXMoeCA9IHNwZWNpZXMsIHkgPSBib2R5X21hc3NfZykpICsKICBnZW9tX2JveHBsb3QoYWxwaGEgPSAwLjIpICsKICBnZW9tX2ppdHRlcih3aWR0aCA9IDAuMiwgYWVzKGNvbG9yID0gZmxpcHBlcl9sZW5ndGhfbW0sIHNoYXBlID0gaXNsYW5kLCBzaXplID0gYmlsbF9sZW5ndGhfbW0pKSArCiAgZmFjZXRfd3JhcCh2YXJzKHNleCkpICsKICBnZW9tX3BvaW50KGRhdGEgPSBtZWRpYXMsIGFlcyh4ID0gc3BlY2llcywgeSA9IHByb21lZGlvKSwgY29sb3IgPSAicmVkIikgKwogIGdlb21fdGV4dChkYXRhID0gbWVkaWFzLCBhZXMoeCA9IHNwZWNpZXMsIHkgPSBwcm9tZWRpbywgbGFiZWwgPSByb3VuZChwcm9tZWRpbywgMCkpLCBoanVzdCA9IC0wLjAxKSArCiAgdGhlbWVfYncoKQpgYGAK</div>
 
 
 </div>
@@ -640,6 +656,11 @@ $(document).ready(function () {
 </script>
 
 <!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("z_script_02.Rmd");
+});
+</script>
 
 <script>
 $(document).ready(function ()  {
