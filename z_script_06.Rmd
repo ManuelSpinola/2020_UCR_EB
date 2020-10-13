@@ -1,0 +1,155 @@
+---
+title: "Cálculo de tamaño de muestra"
+output:
+  html_document:
+    toc: true
+    toc_depth: 6
+    toc_float:
+      collapsed: false
+    code_download: true
+---
+
+
+```{r}
+library(radiant)
+```
+
+
+```{r}
+una_proporcion <- sample_size(type = "proportion",
+                              err_prop = 0.04,
+                              p_prop = 0.2,
+                              conf_lev = 0.95,
+                              pop_correction = "no")
+```
+
+
+```{r}
+summary(una_proporcion)
+```
+
+```{r}
+una_proporcion <- sample_size(type = "proportion",
+                              err_prop = 0.04,
+                              p_prop = 0.2,
+                              conf_lev = 0.95,
+                              pop_correction = "yes",
+                              pop_size = 5000)
+```
+
+```{r}
+summary(una_proporcion)
+```
+
+```{r}
+una_proporcion <- sample_size(type = "proportion",
+                              err_prop = 0.03,
+                              p_prop = 0.5,
+                              conf_lev = 0.95,
+                              pop_correction = "yes",
+                              pop_size = 2000000)
+```
+
+```{r}
+summary(una_proporcion)
+```
+
+```{r}
+una_proporcion <- sample_size(type = "proportion",
+                              err_prop = 0.03,
+                              p_prop = 0.5,
+                              conf_lev = 0.95,
+                              pop_correction = "yes",
+                              pop_size = 200000000)
+```
+
+```{r}
+summary(una_proporcion)
+```
+
+```{r}
+una_proporcion <- sample_size(type = "proportion",
+                              err_prop = 0.05,
+                              p_prop = 0.5,
+                              conf_lev = 0.95,
+                              pop_correction = "yes",
+                              pop_size = 200000000)
+```
+
+```{r}
+summary(una_proporcion)
+```
+
+```{r}
+una_proporcion <- sample_size(type = "proportion",
+                              err_prop = 0.10,
+                              p_prop = 0.5,
+                              conf_lev = 0.95,
+                              pop_correction = "yes",
+                              pop_size = 200000000)
+```
+
+
+```{r}
+summary(una_proporcion)
+```
+
+```{r}
+una_media <- sample_size(type = "mean",
+                         err_mean = 25,
+                         sd_mean = 95)
+```
+
+
+```{r}
+summary(una_media)
+```
+
+```{r}
+una_media <- sample_size(type = "mean",
+                         err_mean = 25,
+                         sd_mean = 95,
+                         conf_lev = 0.95,
+                         incidence = 0.75,
+                         response = 0.4)
+```
+
+
+```{r}
+summary(una_media)
+```
+
+```{r}
+dos_proporciones <- sample_size_comp(type = "proportion",
+                                     p1 = 0.2,
+                                     p2 = 0.35,
+                                     conf_lev = 0.95,
+                                     power = 0.8)
+```
+
+```{r}
+summary(dos_proporciones)
+```
+
+```{r}
+dos_medias <- sample_size_comp(type = "mean",
+                               delta = 18,
+                               sd = 60,
+                               conf_lev = 0.95,
+                               power = 0.8)
+```
+
+
+```{r}
+summary(dos_medias)
+```
+
+
+
+
+
+
+
+
+
+

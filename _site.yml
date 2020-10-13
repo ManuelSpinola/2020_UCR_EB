@@ -28,6 +28,8 @@ navbar:
           href: z_script_04.html
         - text: "Script_05"
           href: z_script_05.html
+        - text: "Script_06"
+          href: z_script_06.html
 output:
   distill::distill_article:
     css: mi_estilo.css
