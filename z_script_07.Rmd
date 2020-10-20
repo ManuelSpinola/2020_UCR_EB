@@ -10,7 +10,7 @@ output:
 ---
 
 
-```{r}
+```{r, message=FALSE, warning=FALSE}
 library(tidyverse)
 library(rio)
 library(DescTools)
