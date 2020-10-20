@@ -14,7 +14,7 @@
 
 <title>Script 03</title>
 
-<script src="site_libs/header-attrs-2.4/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.4.4/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
@@ -29,6 +29,8 @@
 <script src="site_libs/navigation-1.1/sourceembed.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -415,6 +417,9 @@ div.tocify {
     <li>
       <a href="z_script_06.html">Script_06</a>
     </li>
+    <li>
+      <a href="z_script_07.html">Script_07</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -497,7 +502,7 @@ library(vtree)</code></pre>
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();

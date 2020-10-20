@@ -14,7 +14,7 @@
 
 <title>Script 02</title>
 
-<script src="site_libs/header-attrs-2.4/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.4.4/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
@@ -29,6 +29,8 @@
 <script src="site_libs/navigation-1.1/sourceembed.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
 <script src="site_libs/fabric-3.6.3/fabric.min.js"></script>
 <script src="site_libs/FileSaver-2.0.2/FileSaver.min.js"></script>
 <script src="site_libs/jQuery-3.5.1/jquery-3.5.1.min.js"></script>
@@ -418,6 +420,9 @@ div.tocify {
     <li>
       <a href="z_script_06.html">Script_06</a>
     </li>
+    <li>
+      <a href="z_script_07.html">Script_07</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -598,7 +603,7 @@ ping$sex &lt;- factor(ping$sex)</code></pre>
 <pre class="r"><code>vis_dat(ping)</code></pre>
 <p><img src="z_script_02_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <pre class="r"><code>vtree(ping, &quot;species island sex&quot;, horiz = FALSE, varnamepointsize = 24)</code></pre>
-<p><img src="/private/var/folders/cl/hcgkwrb55ls2pmv5kkrslvm40000gn/T/RtmpM4yDO4/vtree2.png" style="height:3in" /></p>
+<p><img src="/private/var/folders/cl/hcgkwrb55ls2pmv5kkrslvm40000gn/T/RtmpQhirY8/vtree2.png" style="height:3in" /></p>
 <pre class="r"><code>medias &lt;- ping %&gt;%
   group_by(species, sex) %&gt;%
   summarize(promedio = mean(body_mass_g))</code></pre>
@@ -635,7 +640,7 @@ ping$sex &lt;- factor(ping$sex)</code></pre>
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
