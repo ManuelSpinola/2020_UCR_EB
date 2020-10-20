@@ -3,10 +3,6 @@ title: "Script 01"
 author: "Autor: Manuel Spínola"
 output:
   html_document:
-    toc: true
-    toc_depth: 6
-    toc_float:
-      collapsed: false
     code_download: true
 ---
 
