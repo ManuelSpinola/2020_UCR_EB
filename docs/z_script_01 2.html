@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Autor: Manuel Spínola" />
+
+
+<title>Script 01</title>
+
+<script src="site_libs/header-attrs-2.4.4/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
+<link href="site_libs/tabwid-1.0.0/tabwid.css" rel="stylesheet" />
+<script src="site_libs/tabwid-1.0.0/tabwid.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+      </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="index.html">Inicio</a>
+</li>
+<li>
+  <a href="aaa_programa.html">Programa</a>
+</li>
+<li>
+  <a href="aab_bibliografia.html">Bibliografía</a>
+</li>
+<li>
+  <a href="aac_clases.html">Clases</a>
+</li>
+<li>
+  <a href="aad_tareas.html">Tareas</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    R scripts
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="z_script_01.html">Script_01</a>
+    </li>
+    <li>
+      <a href="z_script_02.html">Script_02</a>
+    </li>
+    <li>
+      <a href="z_script_03.html">Script_03</a>
+    </li>
+    <li>
+      <a href="z_script_04.html">Script_04</a>
+    </li>
+    <li>
+      <a href="z_script_05.html">Script_05</a>
+    </li>
+    <li>
+      <a href="z_script_06.html">Script_06</a>
+    </li>
+    <li>
+      <a href="z_script_07.html">Script_07</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Script 01</h1>
+<h4 class="author">Autor: Manuel Spínola</h4>
+
+</div>
+
+
+<pre class="r"><code>library(tidyverse)
+library(rio)
+library(knitr)
+library(flextable)</code></pre>
+<div id="comienzo" class="section level1">
+<h1>Comienzo</h1>
+<div id="primer-chunk" class="section level2">
+<h2>Primer chunk</h2>
+<div id="cargar-paquetes" class="section level3">
+<h3>cargar paquetes</h3>
+<p>Para cargar los paquetes utilizó la función library.</p>
+<p><strong>negrita</strong></p>
+<div id="métodos" class="section level4">
+<h4>Métodos</h4>
+<pre class="r"><code>include_graphics(&quot;04_ilustraciones/r_first_then.png&quot;)</code></pre>
+<p><img src="04_ilustraciones/r_first_then.png" width="1177" /></p>
+<pre class="r"><code>include_graphics(&quot;04_ilustraciones/penguins.png&quot;)</code></pre>
+<p><img src="04_ilustraciones/penguins.png" width="900" /></p>
+<pre class="r"><code>ping &lt;- import(&quot;03_datos/pinguinos.xlsx&quot;)</code></pre>
+<pre class="r"><code>head(ping)</code></pre>
+<pre><code>##   species    island bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+## 1  Adelie Torgersen           39.1          18.7               181        3750
+## 2  Adelie Torgersen           39.5          17.4               186        3800
+## 3  Adelie Torgersen           40.3          18.0               195        3250
+## 4  Adelie Torgersen             NA            NA                NA          NA
+## 5  Adelie Torgersen           36.7          19.3               193        3450
+## 6  Adelie Torgersen           39.3          20.6               190        3650
+##      sex
+## 1   male
+## 2 female
+## 3 female
+## 4   &lt;NA&gt;
+## 5 female
+## 6   male</code></pre>
+<pre class="r"><code>media_peso &lt;- mean(ping$body_mass_g, na.rm = TRUE)</code></pre>
+<pre class="r"><code>media_peso</code></pre>
+<pre><code>## [1] 4201.754</code></pre>
+<pre class="r"><code>tabla &lt;- flextable(head(ping))</code></pre>
+<pre class="r"><code>tabla</code></pre>
+<div class="tabwid"><style>.cl-4d53d348{font-family:'Arial';font-size:11px;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(17, 17, 17, 1.00);background-color:transparent;}.cl-4d53e284{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:2px;padding-top:2px;padding-left:5px;padding-right:5px;line-height: 1.00;background-color:transparent;}.cl-4d53e298{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:2px;padding-top:2px;padding-left:5px;padding-right:5px;line-height: 1.00;background-color:transparent;}.cl-4d54084a{width:54px;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-4d54085e{width:54px;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-4d540868{width:54px;background-color:transparent;vertical-align: middle;border-bottom: 2.00px solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-4d540872{width:54px;background-color:transparent;vertical-align: middle;border-bottom: 2.00px solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-4d54087c{width:54px;background-color:transparent;vertical-align: middle;border-bottom: 2.00px solid rgba(0, 0, 0, 1.00);border-top: 2.00px solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-4d540886{width:54px;background-color:transparent;vertical-align: middle;border-bottom: 2.00px solid rgba(0, 0, 0, 1.00);border-top: 2.00px solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table style='border-collapse:collapse;'><thead><tr style="overflow-wrap:break-word;"><td class="cl-4d540886"><p class="cl-4d53e284"><span class="cl-4d53d348">species</span></p></td><td class="cl-4d540886"><p class="cl-4d53e284"><span class="cl-4d53d348">island</span></p></td><td class="cl-4d54087c"><p class="cl-4d53e298"><span class="cl-4d53d348">bill_length_mm</span></p></td><td class="cl-4d54087c"><p class="cl-4d53e298"><span class="cl-4d53d348">bill_depth_mm</span></p></td><td class="cl-4d54087c"><p class="cl-4d53e298"><span class="cl-4d53d348">flipper_length_mm</span></p></td><td class="cl-4d54087c"><p class="cl-4d53e298"><span class="cl-4d53d348">body_mass_g</span></p></td><td class="cl-4d540886"><p class="cl-4d53e284"><span class="cl-4d53d348">sex</span></p></td></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-4d54084a"><p class="cl-4d53e284"><span class="cl-4d53d348">Adelie</span></p></td><td class="cl-4d54084a"><p class="cl-4d53e284"><span class="cl-4d53d348">Torgersen</span></p></td><td class="cl-4d54085e"><p class="cl-4d53e298"><span class="cl-4d53d348">39.1</span></p></td><td class="cl-4d54085e"><p class="cl-4d53e298"><span class="cl-4d53d348">18.7</span></p></td><td class="cl-4d54085e"><p class="cl-4d53e298"><span class="cl-4d53d348">181</span></p></td><td class="cl-4d54085e"><p class="cl-4d53e298"><span class="cl-4d53d348">3750</span></p></td><td class="cl-4d54084a"><p class="cl-4d53e284"><span class="cl-4d53d348">male</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-4d54084a"><p class="cl-4d53e284"><span class="cl-4d53d348">Adelie</span></p></td><td class="cl-4d54084a"><p class="cl-4d53e284"><span class="cl-4d53d348">Torgersen</span></p></td><td class="cl-4d54085e"><p class="cl-4d53e298"><span class="cl-4d53d348">39.5</span></p></td><td class="cl-4d54085e"><p class="cl-4d53e298"><span class="cl-4d53d348">17.4</span></p></td><td class="cl-4d54085e"><p class="cl-4d53e298"><span class="cl-4d53d348">186</span></p></td><td class="cl-4d54085e"><p class="cl-4d53e298"><span class="cl-4d53d348">3800</span></p></td><td class="cl-4d54084a"><p class="cl-4d53e284"><span class="cl-4d53d348">female</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-4d54084a"><p class="cl-4d53e284"><span class="cl-4d53d348">Adelie</span></p></td><td class="cl-4d54084a"><p class="cl-4d53e284"><span class="cl-4d53d348">Torgersen</span></p></td><td class="cl-4d54085e"><p class="cl-4d53e298"><span class="cl-4d53d348">40.3</span></p></td><td class="cl-4d54085e"><p class="cl-4d53e298"><span class="cl-4d53d348">18.0</span></p></td><td class="cl-4d54085e"><p class="cl-4d53e298"><span class="cl-4d53d348">195</span></p></td><td class="cl-4d54085e"><p class="cl-4d53e298"><span class="cl-4d53d348">3250</span></p></td><td class="cl-4d54084a"><p class="cl-4d53e284"><span class="cl-4d53d348">female</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-4d54084a"><p class="cl-4d53e284"><span class="cl-4d53d348">Adelie</span></p></td><td class="cl-4d54084a"><p class="cl-4d53e284"><span class="cl-4d53d348">Torgersen</span></p></td><td class="cl-4d54085e"><p class="cl-4d53e298"><span class="cl-4d53d348">NA</span></p></td><td class="cl-4d54085e"><p class="cl-4d53e298"><span class="cl-4d53d348">NA</span></p></td><td class="cl-4d54085e"><p class="cl-4d53e298"><span class="cl-4d53d348">NA</span></p></td><td class="cl-4d54085e"><p class="cl-4d53e298"><span class="cl-4d53d348">NA</span></p></td><td class="cl-4d54084a"><p class="cl-4d53e284"><span class="cl-4d53d348"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-4d54084a"><p class="cl-4d53e284"><span class="cl-4d53d348">Adelie</span></p></td><td class="cl-4d54084a"><p class="cl-4d53e284"><span class="cl-4d53d348">Torgersen</span></p></td><td class="cl-4d54085e"><p class="cl-4d53e298"><span class="cl-4d53d348">36.7</span></p></td><td class="cl-4d54085e"><p class="cl-4d53e298"><span class="cl-4d53d348">19.3</span></p></td><td class="cl-4d54085e"><p class="cl-4d53e298"><span class="cl-4d53d348">193</span></p></td><td class="cl-4d54085e"><p class="cl-4d53e298"><span class="cl-4d53d348">3450</span></p></td><td class="cl-4d54084a"><p class="cl-4d53e284"><span class="cl-4d53d348">female</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-4d540872"><p class="cl-4d53e284"><span class="cl-4d53d348">Adelie</span></p></td><td class="cl-4d540872"><p class="cl-4d53e284"><span class="cl-4d53d348">Torgersen</span></p></td><td class="cl-4d540868"><p class="cl-4d53e298"><span class="cl-4d53d348">39.3</span></p></td><td class="cl-4d540868"><p class="cl-4d53e298"><span class="cl-4d53d348">20.6</span></p></td><td class="cl-4d540868"><p class="cl-4d53e298"><span class="cl-4d53d348">190</span></p></td><td class="cl-4d540868"><p class="cl-4d53e298"><span class="cl-4d53d348">3650</span></p></td><td class="cl-4d540872"><p class="cl-4d53e284"><span class="cl-4d53d348">male</span></p></td></tr></tbody></table></div>
+<pre class="r"><code>theme_zebra(tabla)</code></pre>
+<div class="tabwid"><style>.cl-4d5f2644{font-family:'Arial';font-size:11px;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(17, 17, 17, 1.00);background-color:transparent;}.cl-4d5f2662{font-family:'Arial';font-size:11px;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(17, 17, 17, 1.00);background-color:transparent;}.cl-4d5f34f4{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:2px;padding-top:2px;padding-left:2px;padding-right:2px;line-height: 1.00;background-color:transparent;}.cl-4d5f3508{margin:0;text-align:right;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:2px;padding-top:2px;padding-left:2px;padding-right:2px;line-height: 1.00;background-color:transparent;}.cl-4d5f58bc{width:54px;background-clip: padding-box;background-color:rgba(239, 239, 239, 1.00);vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-4d5f58da{width:54px;background-clip: padding-box;background-color:rgba(239, 239, 239, 1.00);vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-4d5f58e4{width:54px;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-4d5f58ee{width:54px;background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-4d5f58ef{width:54px;background-clip: padding-box;background-color:rgba(207, 207, 207, 1.00);vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-4d5f58f8{width:54px;background-clip: padding-box;background-color:rgba(207, 207, 207, 1.00);vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style><table style='border-collapse:collapse;'><thead><tr style="overflow-wrap:break-word;"><td class="cl-4d5f58f8"><p class="cl-4d5f34f4"><span class="cl-4d5f2644">species</span></p></td><td class="cl-4d5f58f8"><p class="cl-4d5f34f4"><span class="cl-4d5f2644">island</span></p></td><td class="cl-4d5f58ef"><p class="cl-4d5f3508"><span class="cl-4d5f2644">bill_length_mm</span></p></td><td class="cl-4d5f58ef"><p class="cl-4d5f3508"><span class="cl-4d5f2644">bill_depth_mm</span></p></td><td class="cl-4d5f58ef"><p class="cl-4d5f3508"><span class="cl-4d5f2644">flipper_length_mm</span></p></td><td class="cl-4d5f58ef"><p class="cl-4d5f3508"><span class="cl-4d5f2644">body_mass_g</span></p></td><td class="cl-4d5f58f8"><p class="cl-4d5f34f4"><span class="cl-4d5f2644">sex</span></p></td></tr></thead><tbody><tr style="overflow-wrap:break-word;"><td class="cl-4d5f58bc"><p class="cl-4d5f34f4"><span class="cl-4d5f2662">Adelie</span></p></td><td class="cl-4d5f58bc"><p class="cl-4d5f34f4"><span class="cl-4d5f2662">Torgersen</span></p></td><td class="cl-4d5f58da"><p class="cl-4d5f3508"><span class="cl-4d5f2662">39.1</span></p></td><td class="cl-4d5f58da"><p class="cl-4d5f3508"><span class="cl-4d5f2662">18.7</span></p></td><td class="cl-4d5f58da"><p class="cl-4d5f3508"><span class="cl-4d5f2662">181</span></p></td><td class="cl-4d5f58da"><p class="cl-4d5f3508"><span class="cl-4d5f2662">3750</span></p></td><td class="cl-4d5f58bc"><p class="cl-4d5f34f4"><span class="cl-4d5f2662">male</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-4d5f58e4"><p class="cl-4d5f34f4"><span class="cl-4d5f2662">Adelie</span></p></td><td class="cl-4d5f58e4"><p class="cl-4d5f34f4"><span class="cl-4d5f2662">Torgersen</span></p></td><td class="cl-4d5f58ee"><p class="cl-4d5f3508"><span class="cl-4d5f2662">39.5</span></p></td><td class="cl-4d5f58ee"><p class="cl-4d5f3508"><span class="cl-4d5f2662">17.4</span></p></td><td class="cl-4d5f58ee"><p class="cl-4d5f3508"><span class="cl-4d5f2662">186</span></p></td><td class="cl-4d5f58ee"><p class="cl-4d5f3508"><span class="cl-4d5f2662">3800</span></p></td><td class="cl-4d5f58e4"><p class="cl-4d5f34f4"><span class="cl-4d5f2662">female</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-4d5f58bc"><p class="cl-4d5f34f4"><span class="cl-4d5f2662">Adelie</span></p></td><td class="cl-4d5f58bc"><p class="cl-4d5f34f4"><span class="cl-4d5f2662">Torgersen</span></p></td><td class="cl-4d5f58da"><p class="cl-4d5f3508"><span class="cl-4d5f2662">40.3</span></p></td><td class="cl-4d5f58da"><p class="cl-4d5f3508"><span class="cl-4d5f2662">18.0</span></p></td><td class="cl-4d5f58da"><p class="cl-4d5f3508"><span class="cl-4d5f2662">195</span></p></td><td class="cl-4d5f58da"><p class="cl-4d5f3508"><span class="cl-4d5f2662">3250</span></p></td><td class="cl-4d5f58bc"><p class="cl-4d5f34f4"><span class="cl-4d5f2662">female</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-4d5f58e4"><p class="cl-4d5f34f4"><span class="cl-4d5f2662">Adelie</span></p></td><td class="cl-4d5f58e4"><p class="cl-4d5f34f4"><span class="cl-4d5f2662">Torgersen</span></p></td><td class="cl-4d5f58ee"><p class="cl-4d5f3508"><span class="cl-4d5f2662">NA</span></p></td><td class="cl-4d5f58ee"><p class="cl-4d5f3508"><span class="cl-4d5f2662">NA</span></p></td><td class="cl-4d5f58ee"><p class="cl-4d5f3508"><span class="cl-4d5f2662">NA</span></p></td><td class="cl-4d5f58ee"><p class="cl-4d5f3508"><span class="cl-4d5f2662">NA</span></p></td><td class="cl-4d5f58e4"><p class="cl-4d5f34f4"><span class="cl-4d5f2662"></span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-4d5f58bc"><p class="cl-4d5f34f4"><span class="cl-4d5f2662">Adelie</span></p></td><td class="cl-4d5f58bc"><p class="cl-4d5f34f4"><span class="cl-4d5f2662">Torgersen</span></p></td><td class="cl-4d5f58da"><p class="cl-4d5f3508"><span class="cl-4d5f2662">36.7</span></p></td><td class="cl-4d5f58da"><p class="cl-4d5f3508"><span class="cl-4d5f2662">19.3</span></p></td><td class="cl-4d5f58da"><p class="cl-4d5f3508"><span class="cl-4d5f2662">193</span></p></td><td class="cl-4d5f58da"><p class="cl-4d5f3508"><span class="cl-4d5f2662">3450</span></p></td><td class="cl-4d5f58bc"><p class="cl-4d5f34f4"><span class="cl-4d5f2662">female</span></p></td></tr><tr style="overflow-wrap:break-word;"><td class="cl-4d5f58e4"><p class="cl-4d5f34f4"><span class="cl-4d5f2662">Adelie</span></p></td><td class="cl-4d5f58e4"><p class="cl-4d5f34f4"><span class="cl-4d5f2662">Torgersen</span></p></td><td class="cl-4d5f58ee"><p class="cl-4d5f3508"><span class="cl-4d5f2662">39.3</span></p></td><td class="cl-4d5f58ee"><p class="cl-4d5f3508"><span class="cl-4d5f2662">20.6</span></p></td><td class="cl-4d5f58ee"><p class="cl-4d5f3508"><span class="cl-4d5f2662">190</span></p></td><td class="cl-4d5f58ee"><p class="cl-4d5f3508"><span class="cl-4d5f2662">3650</span></p></td><td class="cl-4d5f58e4"><p class="cl-4d5f34f4"><span class="cl-4d5f2662">male</span></p></td></tr></tbody></table></div>
+<pre class="r"><code>include_graphics(&quot;04_ilustraciones/coding_cases.png&quot;)</code></pre>
+<p><img src="04_ilustraciones/coding_cases.png" width="2000" /></p>
+<p>altura_planta</p>
+<p>alturaPlanta</p>
+<p>AlturaPlanta</p>
+<p>altura-planta</p>
+<pre class="r"><code>include_graphics(&quot;04_ilustraciones/continuous_discrete.png&quot;)</code></pre>
+<p><img src="04_ilustraciones/continuous_discrete.png" width="2058" /></p>
+<pre class="r"><code>include_graphics(&quot;04_ilustraciones/nominal_ordinal_binary.png&quot;)</code></pre>
+<p><img src="04_ilustraciones/nominal_ordinal_binary.png" width="2500" /></p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiU2NyaXB0IDAxIgphdXRob3I6ICJBdXRvcjogTWFudWVsIFNww61ub2xhIgpvdXRwdXQ6CiAgaHRtbF9kb2N1bWVudDoKICAgIHRvYzogdHJ1ZQogICAgdG9jX2RlcHRoOiA2CiAgICB0b2NfZmxvYXQ6CiAgICAgIGNvbGxhcHNlZDogZmFsc2UKICAgIGNvZGVfZG93bmxvYWQ6IHRydWUKLS0tCgpgYGB7ciBzZXR1cCwgaW5jbHVkZT1GQUxTRX0Ka25pdHI6Om9wdHNfY2h1bmskc2V0KGVjaG8gPSBUUlVFKQpgYGAKCgpgYGB7ciwgbWVzc2FnZSA9IEZBTFNFLCB3YXJuaW5nID0gRkFMU0UsIGVjaG89VFJVRX0KbGlicmFyeSh0aWR5dmVyc2UpCmxpYnJhcnkocmlvKQpsaWJyYXJ5KGtuaXRyKQpsaWJyYXJ5KGZsZXh0YWJsZSkKYGBgCgoKIyBDb21pZW56bwoKIyMgUHJpbWVyIGNodW5rCgojIyMgY2FyZ2FyIHBhcXVldGVzCgpQYXJhIGNhcmdhciBsb3MgcGFxdWV0ZXMgdXRpbGl6w7MgbGEgZnVuY2nDs24gbGlicmFyeS4KCioqbmVncml0YSoqCgojIyMjIE3DqXRvZG9zCgoKYGBge3J9CmluY2x1ZGVfZ3JhcGhpY3MoIjA0X2lsdXN0cmFjaW9uZXMvcl9maXJzdF90aGVuLnBuZyIpCmBgYAoKYGBge3J9CmluY2x1ZGVfZ3JhcGhpY3MoIjA0X2lsdXN0cmFjaW9uZXMvcGVuZ3VpbnMucG5nIikKYGBgCgpgYGB7cn0KcGluZyA8LSBpbXBvcnQoIjAzX2RhdG9zL3Bpbmd1aW5vcy54bHN4IikKYGBgCgoKYGBge3J9CmhlYWQocGluZykKYGBgCgpgYGB7cn0KbWVkaWFfcGVzbyA8LSBtZWFuKHBpbmckYm9keV9tYXNzX2csIG5hLnJtID0gVFJVRSkKYGBgCgpgYGB7cn0KbWVkaWFfcGVzbwpgYGAKCgpgYGB7cn0KdGFibGEgPC0gZmxleHRhYmxlKGhlYWQocGluZykpCmBgYAoKYGBge3J9CnRhYmxhCmBgYAoKYGBge3J9CnRoZW1lX3plYnJhKHRhYmxhKQpgYGAKCgpgYGB7cn0KaW5jbHVkZV9ncmFwaGljcygiMDRfaWx1c3RyYWNpb25lcy9jb2RpbmdfY2FzZXMucG5nIikKYGBgCgphbHR1cmFfcGxhbnRhCgphbHR1cmFQbGFudGEKCkFsdHVyYVBsYW50YQoKYWx0dXJhLXBsYW50YQoKYGBge3J9CmluY2x1ZGVfZ3JhcGhpY3MoIjA0X2lsdXN0cmFjaW9uZXMvY29udGludW91c19kaXNjcmV0ZS5wbmciKQpgYGAKCmBgYHtyfQppbmNsdWRlX2dyYXBoaWNzKCIwNF9pbHVzdHJhY2lvbmVzL25vbWluYWxfb3JkaW5hbF9iaW5hcnkucG5nIikKYGBgCgoKCgoKCg==</div>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("z_script_01.Rmd");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4,h5,h6",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
