@@ -1,0 +1,154 @@
+---
+title: "Tarea_02"
+author: 'Nota: 10'
+output:
+  pdf_document: default
+  html_document:
+    code_download: yes
+---
+
+```{r}
+library(tidyverse)
+library(rio)
+library(knitr)
+library(DescTools)
+library(data.table)
+library(modelbased)
+library(emmeans)
+```
+
+
+<br>
+
+## Nombre del estudiante: Tania Picado Pérez
+
+<br>
+
+### 1. Identifica los conceptos de precisión, sesgo, y exactitud en los diagramas siguientes.  Una pista, el diagrama B es no sesgado pero impreciso = inexacto.
+
+```{r}
+include_graphics("figura.png")
+```
+
+<br>
+
+A: no sesgado pero preciso = exacto
+
+B: no sesgado pero impreciso = inexacto
+
+C: sesgado pero preciso = inexacto
+
+D: sesgado pero impreciso = inexacto
+
+<br>
+
+### 2. Un investigador esta investigando algunas características morfométricas, tales como el peso corporal (g) y la longitud del pico (mm), de 2 especies de de pinzones africanos.
+
+Datos: PinzonesAfricanos.csv
+
+```{r}
+Datos_pinzones = import("PinzonesAfricanos.csv")
+```
+
+```{r}
+head(Datos_pinzones)
+```
+
+
+### ¿Cuál de las especies tiene el pico más largo?
+
+a. Analiza el resultado desde el punto de vista del valor de P.
+
+```{r}
+t.test(LargoDePico ~ Especie, data = Datos_pinzones, var.equal = TRUE)
+```
+## De acuerdo al estadístico t = -22.4, se rechaza la hipótesis nula. Con respecto al valor de p-value < 2.2e-16 existe una diferencia estadísticamente significativa (p < 0,05) entre el largo de pico de las dos especies de Pinzones## 
+
+
+b. Analiza el resultado desde el punto de vista del tamaño del efecto.
+
+```{r}
+MeanDiffCI(LargoDePico ~ Especie, data = Datos_pinzones)
+```
+
+## WB.SPARW - CRU.WAXB = 3.4 (IC 95% = 3,0  -  3,7) Se puede inferir con un 95% de confianza que la verdadera diferencia en el largo de pico para las especies (WB.SPARW,CRU.WAXB) de Pinzones Africanos se encuentra entre 3,0  -  3,7cm##
+
+
+
+<br>
+
+
+### 3. Muchas personas creen que para logar un estimado preciso de la media poblacional es necesario muestrear una fracción sustancial de la población.  Esta pregunta esta desarrollada para probar si tal aseveración es cierta o no.
+
+a. Para una población con desvío estándar 50, encuentra el error estándar de los siguientes valores de N (tamaño de población) y n (tamaño de muestra).  Coloca los errores estándares calculados en las celdas vacías de la tabla.
+
+<br>
+
+```{r, echo = FALSE}
+library(knitr)
+library(data.table)
+c <- data.table("N =" = c("n =", "Error estándar ="), "100" = c(10, "15.1"), "1000" = c("100", "4.7"), "10000" = c("1000", "1.5"), "1000000" = c("10000", "0.4"), "10000000" = c("1000000", "0.1"))
+kable(c)
+
+```
+
+
+
+
+```{r}
+Error_E_100 <- (50/sqrt(10))*(sqrt(1-(10/100)))*(sqrt(100/(100-1)))
+```
+
+```{r}
+Error_E_100
+```
+
+```{r}
+Error_E_1000 <- (50/sqrt(100))*(sqrt(1-(100/1000)))*(sqrt(1000/(1000-1)))
+
+```
+
+
+```{r}
+Error_E_1000
+```
+
+
+```{r}
+Error_E_10000 <- (50/sqrt(1000))*(sqrt(1-(1000/10000)))*(sqrt(10000/(10000-1)))
+
+```
+
+
+```{r}
+Error_E_10000
+```
+
+```{r}
+Error_E_100000 <- (50/sqrt(10000))*(sqrt(1-(10000/100000)))*(sqrt(100000/(100000-1)))
+
+```
+
+
+```{r}
+Error_E_100000
+```
+
+```{r}
+Error_E_1000000 <- (50/sqrt(100000))*(sqrt(1-(100000/1000000)))*(sqrt(1000000/(1000000-1)))
+
+```
+
+```{r}
+Error_E_1000000
+```
+
+
+b. Se te ocurre alguna explicación de los resultados obtenidos.
+
+##Con un desvío estandar igual, si se aumenta el tamaño de la muestra se disminuye el error estándar, esto debido a que en este caso está aumentando el tamaño de la muestra pero la desviación estándar sigue igual, por lo cual esta desviación disminuye en relación con los datos de N y n.
+
+
+
+
+
