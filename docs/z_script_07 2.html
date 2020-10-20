@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>EDA: Análisis exploratorio de los datos</title>
+
+<script src="site_libs/header-attrs-2.4.6/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="index.html">Inicio</a>
+</li>
+<li>
+  <a href="aaa_programa.html">Programa</a>
+</li>
+<li>
+  <a href="aab_bibliografia.html">Bibliografía</a>
+</li>
+<li>
+  <a href="aac_clases.html">Clases</a>
+</li>
+<li>
+  <a href="aad_tareas.html">Tareas</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    R scripts
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="z_script_01.html">Script_01</a>
+    </li>
+    <li>
+      <a href="z_script_02.html">Script_02</a>
+    </li>
+    <li>
+      <a href="z_script_03.html">Script_03</a>
+    </li>
+    <li>
+      <a href="z_script_04.html">Script_04</a>
+    </li>
+    <li>
+      <a href="z_script_05.html">Script_05</a>
+    </li>
+    <li>
+      <a href="z_script_06.html">Script_06</a>
+    </li>
+    <li>
+      <a href="z_script_07.html">Script_07</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">EDA: Análisis exploratorio de los datos</h1>
+
+</div>
+
+
+<pre class="r"><code>library(tidyverse)
+library(rio)
+library(DescTools)
+library(visdat)
+library(knitr)
+library(GGally)
+library(SmartEDA)
+library(inspectdf)
+library(gapminder)</code></pre>
+<pre class="r"><code>pin &lt;- import(&quot;03_datos/pinguinos.xlsx&quot;)</code></pre>
+<pre class="r"><code>head(pin)</code></pre>
+<pre><code>##   species    island bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+## 1  Adelie Torgersen           39.1          18.7               181        3750
+## 2  Adelie Torgersen           39.5          17.4               186        3800
+## 3  Adelie Torgersen           40.3          18.0               195        3250
+## 4  Adelie Torgersen             NA            NA                NA          NA
+## 5  Adelie Torgersen           36.7          19.3               193        3450
+## 6  Adelie Torgersen           39.3          20.6               190        3650
+##      sex
+## 1   male
+## 2 female
+## 3 female
+## 4   &lt;NA&gt;
+## 5 female
+## 6   male</code></pre>
+<pre class="r"><code>pin$species &lt;- factor(pin$species)
+pin$island &lt;- factor(pin$island)
+pin$sex &lt;- factor(pin$sex)</code></pre>
+<pre class="r"><code>vis_dat(pin)</code></pre>
+<p><img src="z_script_07_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<pre class="r"><code>ina &lt;- inspect_na(pin)
+ina</code></pre>
+<pre><code>## # A tibble: 7 x 3
+##   col_name            cnt  pcnt
+##   &lt;chr&gt;             &lt;int&gt; &lt;dbl&gt;
+## 1 sex                  11 3.20 
+## 2 bill_length_mm        2 0.581
+## 3 bill_depth_mm         2 0.581
+## 4 flipper_length_mm     2 0.581
+## 5 body_mass_g           2 0.581
+## 6 species               0 0    
+## 7 island                0 0</code></pre>
+<pre class="r"><code>show_plot(ina)</code></pre>
+<p><img src="z_script_07_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<pre class="r"><code>pin &lt;- na.omit(pin)</code></pre>
+<pre class="r"><code>it &lt;- inspect_types(pin)
+it</code></pre>
+<pre><code>## # A tibble: 2 x 4
+##   type      cnt  pcnt col_name    
+##   &lt;chr&gt;   &lt;int&gt; &lt;dbl&gt; &lt;named list&gt;
+## 1 numeric     4  57.1 &lt;chr [4]&gt;   
+## 2 factor      3  42.9 &lt;chr [3]&gt;</code></pre>
+<pre class="r"><code>show_plot(it)</code></pre>
+<p><img src="z_script_07_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<pre class="r"><code>ExpData(data = pin, type = 1)</code></pre>
+<pre><code>##                                           Descriptions    Value
+## 1                                   Sample size (nrow)      333
+## 2                              No. of variables (ncol)        7
+## 3                    No. of numeric/interger variables        4
+## 4                              No. of factor variables        3
+## 5                                No. of text variables        0
+## 6                             No. of logical variables        0
+## 7                          No. of identifier variables        0
+## 8                                No. of date variables        0
+## 9             No. of zero variance variables (uniform)        0
+## 10               %. of variables having complete cases 100% (7)
+## 11   %. of variables having &gt;0% and &lt;50% missing cases   0% (0)
+## 12 %. of variables having &gt;=50% and &lt;90% missing cases   0% (0)
+## 13          %. of variables having &gt;=90% missing cases   0% (0)</code></pre>
+<pre class="r"><code>ExpData(data = pin, type = 2)</code></pre>
+<pre><code>##   Index     Variable_Name Variable_Type Per_of_Missing No_of_distinct_values
+## 1     1           species        factor              0                     3
+## 2     2            island        factor              0                     3
+## 3     3    bill_length_mm       numeric              0                   163
+## 4     4     bill_depth_mm       numeric              0                    79
+## 5     5 flipper_length_mm       numeric              0                    54
+## 6     6       body_mass_g       numeric              0                    93
+## 7     7               sex        factor              0                     2</code></pre>
+<pre class="r"><code>ExpNumStat(pin)</code></pre>
+<pre><code>##               Vname Group  TN nNeg nZero nPos NegInf PosInf NA_Value
+## 2     bill_depth_mm   All 333    0     0  333      0      0        0
+## 1    bill_length_mm   All 333    0     0  333      0      0        0
+## 4       body_mass_g   All 333    0     0  333      0      0        0
+## 3 flipper_length_mm   All 333    0     0  333      0      0        0
+##   Per_of_Missing       sum    min    max     mean median      SD    CV    IQR
+## 2              0    5715.9   13.1   21.5   17.165   17.3   1.969 0.115    3.1
+## 1              0   14649.6   32.1   59.6   43.993   44.5   5.469 0.124    9.1
+## 4              0 1400950.0 2700.0 6300.0 4207.057 4050.0 805.216 0.191 1225.0
+## 3              0   66922.0  172.0  231.0  200.967  197.0  14.016 0.070   23.0
+##   Skewness Kurtosis
+## 2   -0.149   -0.897
+## 1    0.045   -0.888
+## 4    0.470   -0.740
+## 3    0.359   -0.965</code></pre>
+<pre class="r"><code>ExpNumViz(pin)</code></pre>
+<pre><code>## [[1]]</code></pre>
+<p><img src="z_script_07_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<pre><code>## 
+## [[2]]</code></pre>
+<p><img src="z_script_07_files/figure-html/unnamed-chunk-14-2.png" width="672" /></p>
+<pre><code>## 
+## [[3]]</code></pre>
+<p><img src="z_script_07_files/figure-html/unnamed-chunk-14-3.png" width="672" /></p>
+<pre><code>## 
+## [[4]]</code></pre>
+<p><img src="z_script_07_files/figure-html/unnamed-chunk-14-4.png" width="672" /></p>
+<pre class="r"><code>ExpCatViz(pin)</code></pre>
+<pre><code>## [[1]]</code></pre>
+<p><img src="z_script_07_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<pre><code>## 
+## [[2]]</code></pre>
+<p><img src="z_script_07_files/figure-html/unnamed-chunk-15-2.png" width="672" /></p>
+<pre><code>## 
+## [[3]]</code></pre>
+<p><img src="z_script_07_files/figure-html/unnamed-chunk-15-3.png" width="672" /></p>
+<pre class="r"><code>include_graphics(&quot;04_ilustraciones/graficos_univariados.png&quot;)</code></pre>
+<p><img src="04_ilustraciones/graficos_univariados.png" width="1204" /></p>
+<pre class="r"><code>ggplot(pin, aes(body_mass_g)) +
+  geom_histogram(fill = &quot;dodgerblue3&quot;, bins = 5)</code></pre>
+<p><img src="z_script_07_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<pre class="r"><code>ggplot(pin, aes(body_mass_g)) +
+  geom_dotplot(fill = &quot;dodgerblue3&quot;, dotsize = 0.7)</code></pre>
+<pre><code>## `stat_bindot()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="z_script_07_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<pre class="r"><code>ggplot(pin, aes(x = sex, y = body_mass_g)) +
+  geom_boxplot(fill = &quot;dodgerblue3&quot;) +
+  geom_jitter(width = 0.2)</code></pre>
+<p><img src="z_script_07_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<pre class="r"><code>ggplot(pin, aes(x = sex, y = body_mass_g)) +
+  geom_violin(fill = &quot;dodgerblue3&quot;)</code></pre>
+<p><img src="z_script_07_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<pre class="r"><code>ggplot(pin, aes(x = sex, y = body_mass_g)) +
+  geom_violin(fill = &quot;dodgerblue3&quot;) +
+  geom_dotplot(binaxis = &quot;y&quot;, stackdir = &quot;center&quot;)</code></pre>
+<pre><code>## `stat_bindot()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="z_script_07_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<pre class="r"><code>ggplot(pin, aes(species)) +
+  geom_bar(fill = &quot;dodgerblue3&quot;)</code></pre>
+<p><img src="z_script_07_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<pre class="r"><code>pin_species &lt;- pin %&gt;%
+  group_by(species) %&gt;%
+  summarize(conteo = n())</code></pre>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
+<pre class="r"><code>pin_species</code></pre>
+<pre><code>## # A tibble: 3 x 2
+##   species   conteo
+##   &lt;fct&gt;      &lt;int&gt;
+## 1 Adelie       146
+## 2 Chinstrap     68
+## 3 Gentoo       119</code></pre>
+<pre class="r"><code>ggplot(pin_species, aes(species, conteo)) +
+  geom_col(fill = &quot;dodgerblue3&quot;, width = 0.015) +
+  geom_point(color = &quot;orange&quot;, size = 4) +
+  geom_text(aes(label = conteo), size = 2.5)</code></pre>
+<p><img src="z_script_07_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<pre class="r"><code>ggplot(pin, aes(species, fill = sex)) +
+  geom_bar()</code></pre>
+<p><img src="z_script_07_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<pre class="r"><code>include_graphics(&quot;04_ilustraciones/graficos_bivariados.png&quot;)</code></pre>
+<p><img src="04_ilustraciones/graficos_bivariados.png" width="1246" /></p>
+<pre class="r"><code>ggplot(pin, aes(body_mass_g, flipper_length_mm)) +
+  geom_point() +
+  stat_smooth(method = &quot;lm&quot;)</code></pre>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="z_script_07_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+<pre class="r"><code>ggpairs(pin, c(&quot;bill_length_mm&quot;, &quot;bill_depth_mm&quot;, &quot;body_mass_g&quot;))</code></pre>
+<p><img src="z_script_07_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
+<pre class="r"><code>data(&quot;gapminder&quot;)</code></pre>
+<pre class="r"><code>head(gapminder)</code></pre>
+<pre><code>## # A tibble: 6 x 6
+##   country     continent  year lifeExp      pop gdpPercap
+##   &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;
+## 1 Afghanistan Asia       1952    28.8  8425333      779.
+## 2 Afghanistan Asia       1957    30.3  9240934      821.
+## 3 Afghanistan Asia       1962    32.0 10267083      853.
+## 4 Afghanistan Asia       1967    34.0 11537966      836.
+## 5 Afghanistan Asia       1972    36.1 13079460      740.
+## 6 Afghanistan Asia       1977    38.4 14880372      786.</code></pre>
+<pre class="r"><code>gap &lt;- gapminder %&gt;% dplyr::filter(country %in% c(&quot;Costa Rica&quot;, &quot;Uruguay&quot;, &quot;Spain&quot;, &quot;France&quot;))</code></pre>
+<pre class="r"><code>head(gap)</code></pre>
+<pre><code>## # A tibble: 6 x 6
+##   country    continent  year lifeExp     pop gdpPercap
+##   &lt;fct&gt;      &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;   &lt;int&gt;     &lt;dbl&gt;
+## 1 Costa Rica Americas   1952    57.2  926317     2627.
+## 2 Costa Rica Americas   1957    60.0 1112300     2990.
+## 3 Costa Rica Americas   1962    62.8 1345187     3461.
+## 4 Costa Rica Americas   1967    65.4 1588717     4162.
+## 5 Costa Rica Americas   1972    67.8 1834796     5118.
+## 6 Costa Rica Americas   1977    70.8 2108457     5927.</code></pre>
+<pre class="r"><code>ggplot(gap, aes(year, gdpPercap, group = country, color = country)) +
+  geom_point() +
+  geom_line() +
+  geom_label(aes(label = round(gdpPercap, 0)), size = 2)</code></pre>
+<p><img src="z_script_07_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
+
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiRURBOiBBbsOhbGlzaXMgZXhwbG9yYXRvcmlvIGRlIGxvcyBkYXRvcyIKb3V0cHV0OgogIGh0bWxfZG9jdW1lbnQ6CiAgICB0b2M6IHRydWUKICAgIHRvY19kZXB0aDogNgogICAgdG9jX2Zsb2F0OgogICAgICBjb2xsYXBzZWQ6IGZhbHNlCiAgICBjb2RlX2Rvd25sb2FkOiB0cnVlCi0tLQoKCmBgYHtyLCBtZXNzYWdlPUZBTFNFLCB3YXJuaW5nPUZBTFNFfQpsaWJyYXJ5KHRpZHl2ZXJzZSkKbGlicmFyeShyaW8pCmxpYnJhcnkoRGVzY1Rvb2xzKQpsaWJyYXJ5KHZpc2RhdCkKbGlicmFyeShrbml0cikKbGlicmFyeShHR2FsbHkpCmxpYnJhcnkoU21hcnRFREEpCmxpYnJhcnkoaW5zcGVjdGRmKQpsaWJyYXJ5KGdhcG1pbmRlcikKYGBgCgoKYGBge3J9CnBpbiA8LSBpbXBvcnQoIjAzX2RhdG9zL3Bpbmd1aW5vcy54bHN4IikKYGBgCgpgYGB7cn0KaGVhZChwaW4pCmBgYAoKYGBge3J9CnBpbiRzcGVjaWVzIDwtIGZhY3RvcihwaW4kc3BlY2llcykKcGluJGlzbGFuZCA8LSBmYWN0b3IocGluJGlzbGFuZCkKcGluJHNleCA8LSBmYWN0b3IocGluJHNleCkKYGBgCgoKYGBge3J9CnZpc19kYXQocGluKQpgYGAKCmBgYHtyfQppbmEgPC0gaW5zcGVjdF9uYShwaW4pCmluYQpgYGAKCmBgYHtyfQpzaG93X3Bsb3QoaW5hKQpgYGAKCmBgYHtyfQpwaW4gPC0gbmEub21pdChwaW4pCmBgYAoKCmBgYHtyfQppdCA8LSBpbnNwZWN0X3R5cGVzKHBpbikKaXQKYGBgCgpgYGB7cn0Kc2hvd19wbG90KGl0KQpgYGAKCmBgYHtyfQpFeHBEYXRhKGRhdGEgPSBwaW4sIHR5cGUgPSAxKQpgYGAKCmBgYHtyfQpFeHBEYXRhKGRhdGEgPSBwaW4sIHR5cGUgPSAyKQpgYGAKCmBgYHtyfQpFeHBOdW1TdGF0KHBpbikKYGBgCgpgYGB7cn0KRXhwTnVtVml6KHBpbikKYGBgCgpgYGB7cn0KRXhwQ2F0Vml6KHBpbikKYGBgCgpgYGB7cn0KaW5jbHVkZV9ncmFwaGljcygiMDRfaWx1c3RyYWNpb25lcy9ncmFmaWNvc191bml2YXJpYWRvcy5wbmciKQpgYGAKCmBgYHtyfQpnZ3Bsb3QocGluLCBhZXMoYm9keV9tYXNzX2cpKSArCiAgZ2VvbV9oaXN0b2dyYW0oZmlsbCA9ICJkb2RnZXJibHVlMyIsIGJpbnMgPSA1KQpgYGAKCmBgYHtyfQpnZ3Bsb3QocGluLCBhZXMoYm9keV9tYXNzX2cpKSArCiAgZ2VvbV9kb3RwbG90KGZpbGwgPSAiZG9kZ2VyYmx1ZTMiLCBkb3RzaXplID0gMC43KQpgYGAKCmBgYHtyfQpnZ3Bsb3QocGluLCBhZXMoeCA9IHNleCwgeSA9IGJvZHlfbWFzc19nKSkgKwogIGdlb21fYm94cGxvdChmaWxsID0gImRvZGdlcmJsdWUzIikgKwogIGdlb21faml0dGVyKHdpZHRoID0gMC4yKQpgYGAKCmBgYHtyfQpnZ3Bsb3QocGluLCBhZXMoeCA9IHNleCwgeSA9IGJvZHlfbWFzc19nKSkgKwogIGdlb21fdmlvbGluKGZpbGwgPSAiZG9kZ2VyYmx1ZTMiKQpgYGAKCmBgYHtyfQpnZ3Bsb3QocGluLCBhZXMoeCA9IHNleCwgeSA9IGJvZHlfbWFzc19nKSkgKwogIGdlb21fdmlvbGluKGZpbGwgPSAiZG9kZ2VyYmx1ZTMiKSArCiAgZ2VvbV9kb3RwbG90KGJpbmF4aXMgPSAieSIsIHN0YWNrZGlyID0gImNlbnRlciIpCmBgYAoKYGBge3J9CmdncGxvdChwaW4sIGFlcyhzcGVjaWVzKSkgKwogIGdlb21fYmFyKGZpbGwgPSAiZG9kZ2VyYmx1ZTMiKQpgYGAKCmBgYHtyfQpwaW5fc3BlY2llcyA8LSBwaW4gJT4lCiAgZ3JvdXBfYnkoc3BlY2llcykgJT4lCiAgc3VtbWFyaXplKGNvbnRlbyA9IG4oKSkKYGBgCmBgYHtyfQpwaW5fc3BlY2llcwpgYGAKCmBgYHtyfQpnZ3Bsb3QocGluX3NwZWNpZXMsIGFlcyhzcGVjaWVzLCBjb250ZW8pKSArCiAgZ2VvbV9jb2woZmlsbCA9ICJkb2RnZXJibHVlMyIsIHdpZHRoID0gMC4wMTUpICsKICBnZW9tX3BvaW50KGNvbG9yID0gIm9yYW5nZSIsIHNpemUgPSA0KSArCiAgZ2VvbV90ZXh0KGFlcyhsYWJlbCA9IGNvbnRlbyksIHNpemUgPSAyLjUpCmBgYAoKYGBge3J9CmdncGxvdChwaW4sIGFlcyhzcGVjaWVzLCBmaWxsID0gc2V4KSkgKwogIGdlb21fYmFyKCkKYGBgCgoKYGBge3J9CmluY2x1ZGVfZ3JhcGhpY3MoIjA0X2lsdXN0cmFjaW9uZXMvZ3JhZmljb3NfYml2YXJpYWRvcy5wbmciKQpgYGAKCgpgYGB7cn0KZ2dwbG90KHBpbiwgYWVzKGJvZHlfbWFzc19nLCBmbGlwcGVyX2xlbmd0aF9tbSkpICsKICBnZW9tX3BvaW50KCkgKwogIHN0YXRfc21vb3RoKG1ldGhvZCA9ICJsbSIpCmBgYAoKYGBge3J9CmdncGFpcnMocGluLCBjKCJiaWxsX2xlbmd0aF9tbSIsICJiaWxsX2RlcHRoX21tIiwgImJvZHlfbWFzc19nIikpCmBgYAoKYGBge3J9CmRhdGEoImdhcG1pbmRlciIpCmBgYAoKYGBge3J9CmhlYWQoZ2FwbWluZGVyKQpgYGAKCgpgYGB7cn0KZ2FwIDwtIGdhcG1pbmRlciAlPiUgZHBseXI6OmZpbHRlcihjb3VudHJ5ICVpbiUgYygiQ29zdGEgUmljYSIsICJVcnVndWF5IiwgIlNwYWluIiwgIkZyYW5jZSIpKQpgYGAKCmBgYHtyfQpoZWFkKGdhcCkKYGBgCgoKYGBge3J9CmdncGxvdChnYXAsIGFlcyh5ZWFyLCBnZHBQZXJjYXAsIGdyb3VwID0gY291bnRyeSwgY29sb3IgPSBjb3VudHJ5KSkgKwogIGdlb21fcG9pbnQoKSArCiAgZ2VvbV9saW5lKCkgKwogIGdlb21fbGFiZWwoYWVzKGxhYmVsID0gcm91bmQoZ2RwUGVyY2FwLCAwKSksIHNpemUgPSAyKQpgYGAKCgoK</div>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("z_script_07.Rmd");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4,h5,h6",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
