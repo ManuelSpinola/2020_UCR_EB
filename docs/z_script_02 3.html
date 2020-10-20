@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Autor: Manuel Spínola" />
+
+
+<title>Script 02</title>
+
+<script src="site_libs/header-attrs-2.4.4/header-attrs.js"></script>
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<script src="site_libs/navigation-1.1/sourceembed.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="site_libs/anchor-sections-1.0/anchor-sections.js"></script>
+<script src="site_libs/fabric-3.6.3/fabric.min.js"></script>
+<script src="site_libs/FileSaver-2.0.2/FileSaver.min.js"></script>
+<script src="site_libs/jQuery-3.5.1/jquery-3.5.1.min.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+      </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+#rmd-source-code {
+  display: none;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="index.html">Inicio</a>
+</li>
+<li>
+  <a href="aaa_programa.html">Programa</a>
+</li>
+<li>
+  <a href="aab_bibliografia.html">Bibliografía</a>
+</li>
+<li>
+  <a href="aac_clases.html">Clases</a>
+</li>
+<li>
+  <a href="aad_tareas.html">Tareas</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    R scripts
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="z_script_01.html">Script_01</a>
+    </li>
+    <li>
+      <a href="z_script_02.html">Script_02</a>
+    </li>
+    <li>
+      <a href="z_script_03.html">Script_03</a>
+    </li>
+    <li>
+      <a href="z_script_04.html">Script_04</a>
+    </li>
+    <li>
+      <a href="z_script_05.html">Script_05</a>
+    </li>
+    <li>
+      <a href="z_script_06.html">Script_06</a>
+    </li>
+    <li>
+      <a href="z_script_07.html">Script_07</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-download-source" href="#">Download Rmd</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Script 02</h1>
+<h4 class="author">Autor: Manuel Spínola</h4>
+
+</div>
+
+
+<pre class="r"><code>library(tidyverse)
+library(rio)
+library(fabricerin)
+library(visdat)
+library(vtree)</code></pre>
+<pre class="r"><code>fabric_drawing(cid = &quot;dibujo_01&quot;,
+               cfill = &quot;orange&quot;)</code></pre>
+
+<input id = erasedibujo_01 type = 'checkbox' title='Check it to erase !'>
+
+<input id = dibujo_01drawing-color type = 'color' value = '#005E7A' style = 'width:30px;'>
+
+<input id = exportdibujo_01 type = 'button' style = 'width:55px;' value = 'Export'>
+
+<canvas id="dibujo_01" width="800" height="600"></canvas>
+<script>
+const dibujo_01 = new fabric.Canvas('dibujo_01', {
+    backgroundColor: 'orange',
+    isDrawingMode: true
+
+    });
+
+
+dibujo_01.freeDrawingBrush.width  = 2;
+
+
+dibujo_01drawingColorEl = document.getElementById('dibujo_01drawing-color');
+
+dibujo_01.freeDrawingBrush.color = dibujo_01drawingColorEl.value;
+
+dibujo_01drawingColorEl.onchange = function() {
+    dibujo_01.freeDrawingBrush.color = dibujo_01drawingColorEl.value;
+  };
+
+
+ $('#erasedibujo_01').click(function(){
+
+    if (this.checked) {
+
+      dibujo_01.freeDrawingBrush.color  = 'orange';
+
+    } else {
+
+      dibujo_01.freeDrawingBrush.color = dibujo_01drawingColorEl.value;
+
+    }
+
+
+
+});
+
+
+
+
+
+ $('#erasedibujo_01').click(function(){
+
+    if (this.checked) {
+
+      dibujo_01.freeDrawingBrush.width   = 10;
+
+    } else {
+
+      dibujo_01.freeDrawingBrush.width  = 2;
+
+    }
+
+
+});
+
+
+$('#exportdibujo_01').click(function(){
+
+  $('#dibujo_01').get(0).toBlob(function(blob){
+
+    saveAs(blob, 'dibujo_01-IMG.png');
+
+
+  });
+
+
+});
+
+
+
+
+
+
+</script>
+<pre class="r"><code>fabric_text(cid = &quot;función&quot;,
+            textId = &quot;texto_01&quot;,
+            text = &quot;objeto &lt;- función(argumento1, argumento2)&quot;,
+            fontSize = 20)</code></pre>
+<canvas id="función" width="800" height="600"></canvas>
+<script>
+  var función = new fabric.Canvas('función', {
+
+    isDrawingMode: false
+
+    });
+
+  función.backgroundColor = '#FFFFFF';
+
+  var texto_01 = new fabric.Text("objeto <- función(argumento1, argumento2)", {
+
+  left: 100,
+  top: 100,
+  fontFamily: 'Comic Sans',
+  fontSize: 20,
+  fontStyle: 'normal',
+  fontWeight: 'normal',
+  underline: false,
+  linethrough: false,
+  overline: false,
+  fill: '#2F3941',
+  angle: 0,
+  opacity: 1,
+  stroke: '#282A36',
+  strokeWidth: 1,
+  textAlign: 'center',
+  lineHeight: 1,
+  
+  selectable: true,
+  
+
+});
+
+  función.add(texto_01);
+</script>
+<pre class="r"><code>ping &lt;- import(&quot;03_datos/pinguinos.xlsx&quot;)</code></pre>
+<pre class="r"><code>head(ping)</code></pre>
+<pre><code>##   species    island bill_length_mm bill_depth_mm flipper_length_mm body_mass_g
+## 1  Adelie Torgersen           39.1          18.7               181        3750
+## 2  Adelie Torgersen           39.5          17.4               186        3800
+## 3  Adelie Torgersen           40.3          18.0               195        3250
+## 4  Adelie Torgersen             NA            NA                NA          NA
+## 5  Adelie Torgersen           36.7          19.3               193        3450
+## 6  Adelie Torgersen           39.3          20.6               190        3650
+##      sex
+## 1   male
+## 2 female
+## 3 female
+## 4   &lt;NA&gt;
+## 5 female
+## 6   male</code></pre>
+<pre class="r"><code>vis_dat(ping)</code></pre>
+<p><img src="z_script_02_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<pre class="r"><code>ping &lt;- na.omit(ping)</code></pre>
+<pre class="r"><code>vis_dat(ping)</code></pre>
+<p><img src="z_script_02_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<pre class="r"><code>ping$species &lt;- factor(ping$species)
+ping$island &lt;- factor(ping$island)
+ping$sex &lt;- factor(ping$sex)</code></pre>
+<pre class="r"><code>vis_dat(ping)</code></pre>
+<p><img src="z_script_02_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<pre class="r"><code>vtree(ping, &quot;species island sex&quot;, horiz = FALSE, varnamepointsize = 24)</code></pre>
+<p><img src="/private/var/folders/cl/hcgkwrb55ls2pmv5kkrslvm40000gn/T/RtmpQhirY8/vtree2.png" style="height:3in" /></p>
+<pre class="r"><code>medias &lt;- ping %&gt;%
+  group_by(species, sex) %&gt;%
+  summarize(promedio = mean(body_mass_g))</code></pre>
+<pre><code>## `summarise()` regrouping output by &#39;species&#39; (override with `.groups` argument)</code></pre>
+<pre class="r"><code>medias</code></pre>
+<pre><code>## # A tibble: 6 x 3
+## # Groups:   species [3]
+##   species   sex    promedio
+##   &lt;fct&gt;     &lt;fct&gt;     &lt;dbl&gt;
+## 1 Adelie    female    3369.
+## 2 Adelie    male      4043.
+## 3 Chinstrap female    3527.
+## 4 Chinstrap male      3939.
+## 5 Gentoo    female    4680.
+## 6 Gentoo    male      5485.</code></pre>
+<pre class="r"><code>ggplot(ping, aes(x = species, y = body_mass_g)) +
+  geom_boxplot(alpha = 0.2) +
+  geom_jitter(width = 0.2, aes(color = flipper_length_mm, shape = island, size = bill_length_mm)) +
+  facet_wrap(vars(sex)) +
+  geom_point(data = medias, aes(x = species, y = promedio), color = &quot;red&quot;) +
+  geom_text(data = medias, aes(x = species, y = promedio, label = round(promedio, 0)), hjust = -0.01) +
+  theme_bw()</code></pre>
+<p><img src="z_script_02_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiU2NyaXB0IDAyIgphdXRob3I6ICJBdXRvcjogTWFudWVsIFNww61ub2xhIgpvdXRwdXQ6CiAgaHRtbF9kb2N1bWVudDoKICAgIHRvYzogdHJ1ZQogICAgdG9jX2RlcHRoOiA2CiAgICB0b2NfZmxvYXQ6CiAgICAgIGNvbGxhcHNlZDogZmFsc2UKICAgIGNvZGVfZG93bmxvYWQ6IHRydWUKLS0tCgpgYGB7ciBzZXR1cCwgaW5jbHVkZT1GQUxTRX0Ka25pdHI6Om9wdHNfY2h1bmskc2V0KGVjaG8gPSBUUlVFKQpgYGAKCmBgYHtyLCBtZXNzYWdlPUZBTFNFLCB3YXJuaW5nPUZBTFNFfQpsaWJyYXJ5KHRpZHl2ZXJzZSkKbGlicmFyeShyaW8pCmxpYnJhcnkoZmFicmljZXJpbikKbGlicmFyeSh2aXNkYXQpCmxpYnJhcnkodnRyZWUpCmBgYAoKYGBge3J9CmZhYnJpY19kcmF3aW5nKGNpZCA9ICJkaWJ1am9fMDEiLAogICAgICAgICAgICAgICBjZmlsbCA9ICJvcmFuZ2UiKQpgYGAKCmBgYHtyfQpmYWJyaWNfdGV4dChjaWQgPSAiZnVuY2nDs24iLAogICAgICAgICAgICB0ZXh0SWQgPSAidGV4dG9fMDEiLAogICAgICAgICAgICB0ZXh0ID0gIm9iamV0byA8LSBmdW5jacOzbihhcmd1bWVudG8xLCBhcmd1bWVudG8yKSIsCiAgICAgICAgICAgIGZvbnRTaXplID0gMjApCmBgYAoKYGBge3J9CnBpbmcgPC0gaW1wb3J0KCIwM19kYXRvcy9waW5ndWlub3MueGxzeCIpCmBgYAoKYGBge3J9CmhlYWQocGluZykKYGBgCgpgYGB7cn0KdmlzX2RhdChwaW5nKQpgYGAKCmBgYHtyfQpwaW5nIDwtIG5hLm9taXQocGluZykKYGBgCgpgYGB7cn0KdmlzX2RhdChwaW5nKQpgYGAKCmBgYHtyfQpwaW5nJHNwZWNpZXMgPC0gZmFjdG9yKHBpbmckc3BlY2llcykKcGluZyRpc2xhbmQgPC0gZmFjdG9yKHBpbmckaXNsYW5kKQpwaW5nJHNleCA8LSBmYWN0b3IocGluZyRzZXgpCmBgYAoKYGBge3J9CnZpc19kYXQocGluZykKYGBgCgpgYGB7cn0KdnRyZWUocGluZywgInNwZWNpZXMgaXNsYW5kIHNleCIsIGhvcml6ID0gRkFMU0UsIHZhcm5hbWVwb2ludHNpemUgPSAyNCkKYGBgCgpgYGB7cn0KbWVkaWFzIDwtIHBpbmcgJT4lCiAgZ3JvdXBfYnkoc3BlY2llcywgc2V4KSAlPiUKICBzdW1tYXJpemUocHJvbWVkaW8gPSBtZWFuKGJvZHlfbWFzc19nKSkKYGBgCgpgYGB7cn0KbWVkaWFzCmBgYAoKYGBge3J9CmdncGxvdChwaW5nLCBhZXMoeCA9IHNwZWNpZXMsIHkgPSBib2R5X21hc3NfZykpICsKICBnZW9tX2JveHBsb3QoYWxwaGEgPSAwLjIpICsKICBnZW9tX2ppdHRlcih3aWR0aCA9IDAuMiwgYWVzKGNvbG9yID0gZmxpcHBlcl9sZW5ndGhfbW0sIHNoYXBlID0gaXNsYW5kLCBzaXplID0gYmlsbF9sZW5ndGhfbW0pKSArCiAgZmFjZXRfd3JhcCh2YXJzKHNleCkpICsKICBnZW9tX3BvaW50KGRhdGEgPSBtZWRpYXMsIGFlcyh4ID0gc3BlY2llcywgeSA9IHByb21lZGlvKSwgY29sb3IgPSAicmVkIikgKwogIGdlb21fdGV4dChkYXRhID0gbWVkaWFzLCBhZXMoeCA9IHNwZWNpZXMsIHkgPSBwcm9tZWRpbywgbGFiZWwgPSByb3VuZChwcm9tZWRpbywgMCkpLCBoanVzdCA9IC0wLjAxKSArCiAgdGhlbWVfYncoKQpgYGAK</div>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeSourceEmbed("z_script_02.Rmd");
+});
+</script>
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3,h4,h5,h6",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
