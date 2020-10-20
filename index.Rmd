@@ -5,10 +5,6 @@ description: |
 site: distill::distill_website
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
-```
-
 
 ```{r, include=FALSE}
 library(knitr)
